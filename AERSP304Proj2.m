@@ -18,10 +18,10 @@ I = [ 4.85*10^-3 , 0, 0 ;
 % Part A
 
 OmegaH = sqrt((m*g)/(4*k));
-r0 = 0 ;
+r0 = [0,0] ;
 t = linspace(0,1,1000);
 options = odeset('reltol',1e-12,'abstol',1e-12);
-[t,vz,z] = ode45(@(t,x) (4*k*(OmegaH+70*sin(0.5*pi*t)))/m, t, r0, options);
+[t,z] = ode45(@(t,x) [(4*k*(OmegaH+70*sin(0.5*pi*t)))/m,z], t, r0, options);
 
 
 
