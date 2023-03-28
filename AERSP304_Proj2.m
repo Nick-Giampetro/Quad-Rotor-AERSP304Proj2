@@ -20,7 +20,7 @@ I = [ 4.85*10^-3 , 0, 0 ;
 options = odeset('reltol',1e-12,'abstol',1e-12);
 
 % Question 1 Part A
-t = linspace(0,2,1000) ;
+t = linspace(0,2,2000) ;
 [t,z] = ode45(@(t,z) Q1afun(t,z), t , [0,0] , options);
 
 figure
@@ -29,7 +29,15 @@ title('z(t) vs. t');
 xlabel('t');
 ylabel('z');
 ax = gca ;
-exportgraphics(ax,'Q1A.jpg')
+exportgraphics(ax,'zQ1A.jpg')
+
+figure
+plot(t,z(:,2))
+title('Vz(t) vs. t');
+xlabel('t');
+ylabel('Vz');
+ax = gca ;
+exportgraphics(ax,'vzQ1A.jpg')
 
 %Question 2 Part B
 
