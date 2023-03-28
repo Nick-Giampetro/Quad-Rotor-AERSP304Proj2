@@ -19,7 +19,7 @@ I = [ 4.85*10^-3 , 0, 0 ;
 % setting ODE45 options
 options = odeset('reltol',1e-12,'abstol',1e-12);
 
-% Part A
+% Question 1 Part A
 t = linspace(0,2,1000) ;
 [t,z] = ode45(@(t,z) Q1afun(t,z), t , [0,0] , options);
 
@@ -30,6 +30,9 @@ xlabel('t');
 ylabel('z');
 ax = gca ;
 exportgraphics(ax,'Q1A.jpg')
+
+%Question 2 Part B
+
 
 
 function    rDot = Q1afun(t,z)
@@ -47,9 +50,9 @@ function    rDot = Q1afun(t,z)
     
     z1dot = z2;
     if t < 1 
-        z2dot = (4 * k)/m * (OmegaH + 70 * sin(0.5 * pi * t))^2;
+        z2dot = ((4 * k)/m * (OmegaH + 70 * sin(0.5 * pi * t))^2) - g ;
     elseif t >= 1 
-        z2dot = (4 * k)/m * (OmegaH - 77 * sin(0.5 * pi * t))^2;
+        z2dot = ((4 * k)/m * (OmegaH - 77 * sin(0.5 * pi * t))^2) - g ;
     end
     
     % return
