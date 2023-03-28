@@ -17,28 +17,25 @@ I = [ 4.85*10^-3 , 0, 0 ;
 
 % Part A
 
-OmegaH = sqrt((m*g)/(4*k));
+t = linspace(0,2,2000) ;
+z = zeros(2,1);
 options = odeset('reltol',1e-12,'abstol',1e-12);
-[t,z] = integrator(@(t,z) ((4/m*k)*(OmegaH+70*sin(0.5*pi*t))), [0,0], 0, 1, 1000);
+[t,z] = ode45(@(t,z) Q1afun(t,z), t , [0,0] , options);
 
  
 
 
 
-    
-
-function [t,r] = integrator(func, init, tStart, tEnd, pnts)
-    t = linspace(tStart,tEnd,pnts);
-    options = odeset('reltol',1e-12,'abstol',1e-12);
-    [t,r] = ode45(@(t,r) odeFun( @(t,r)func, t, r), t, init, options);
- end
-
-function    rDot = odeFun(func,t,r)
+function    rDot = Q1afun(t,r)
     r1 = r(1);
     r2 = r(2);
     
     r1dot = r2;
-    r2dot = @(t,r)func;
-  
+    if t < 1 
+        r2dot = (4*k)/m*((sqrt((m*g)/(4*k)))+70*sin(0.5*pi*t))^2;
+    elseif t >= 1 
+        r2dot = (4*k)/m*((sqrt((m*g)/(4*k)))-77*sin(0.5*pi*t))^2;
+    end
+
     rDot = [r1dot; r2dot];
 end
