@@ -64,7 +64,6 @@ function setGlobalM(val)
 global m
 m = val;
 end
-
 function r = getM
 global m
 r = m;
@@ -74,7 +73,6 @@ function setGlobalK(val)
 global k
 k = val;
 end
-
 function r = getK
 global k
 r = k;
@@ -84,7 +82,6 @@ function setGlobalG(val)
 global g
 g = val;
 end
-
 function r = getG
 global g
 r = g;
@@ -94,7 +91,6 @@ function setGlobalL(val)
 global l
 l = val;
 end
-
 function r = getL
 global l
 r = l;
@@ -104,7 +100,6 @@ function setGlobalB(val)
 global b
 b = val;
 end
-
 function r = getB
 global b
 r = b;
