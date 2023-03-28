@@ -8,9 +8,10 @@ close all;
 % const values
 setGlobalG(9.81) ; % m/s
 setGlobalM(0.450) ; % kg
-l = 0.225 ; % 
+setGlobalL(0.225) ; % 
 setGlobalK(2.98*10^-7) ;
-b = 1.14*10^-6 ;
+setGlobalB(1.14*10^-6) ;
+
 I = [ 4.85*10^-3 , 0, 0 ;
      0 , 4.85*10^-3 , 0 ;
      0 , 0 , 8.80*10^-3 ] ;
@@ -23,7 +24,6 @@ options = odeset('reltol',1e-12,'abstol',1e-12);
 [t,z] = ode45(@(t,z) Q1afun(t,z), t , [0,0] , options);
 
  
-
 
 
 function    rDot = Q1afun(t,z)
@@ -46,6 +46,9 @@ function    rDot = Q1afun(t,z)
     rDot = [z1dot; z2dot];
 end
 
+
+
+% GLOBAL VARIABLES
 
 function setGlobalM(val)
 global m
@@ -75,4 +78,24 @@ end
 function r = getG
 global g
 r = g;
+end
+
+function setGlobalL(val)
+global l
+l = val;
+end
+
+function r = getL
+global l
+r = l;
+end
+
+function setGlobalB(val)
+global b
+b = val;
+end
+
+function r = getB
+global b
+r = b;
 end
