@@ -21,10 +21,10 @@ options = odeset('reltol',1e-12,'abstol',1e-12);
 
 % Question 1 Part A
 t = linspace(0,2,2000) ;
-[t,z] = ode45(@(t,z) Q1afun(t,z), t , [0,0] , options);
+[t,r] = ode45(@(t,r) Q1fun(t,r,I), t , [0,0,0,0,0,0,0,0,0,0,0,0] , options);
 
 figure
-plot(t,z(:,1))
+plot(t,r(:,5))
 title('z(t) vs. t');
 xlabel('t');
 ylabel('z');
@@ -32,18 +32,17 @@ ax = gca ;
 exportgraphics(ax,'zQ1A.jpg')
 
 figure
-plot(t,z(:,2))
+plot(t,r(:,6))
 title('Vz(t) vs. t');
 xlabel('t');
 ylabel('Vz');
 ax = gca ;
 exportgraphics(ax,'vzQ1A.jpg')
 
-% Question 2 Part B
 
 
-% acceleration equation for Q1 part A
-function    rDot = Q1afun(t,z)
+% acceleration equation for Q1
+function    rDot = Q1fun(t,r,I)
     % pulling consts into function
     g = getG ;
     m = getM ;
@@ -51,20 +50,48 @@ function    rDot = Q1afun(t,z)
     
     % calculating hover omega
     OmegaH = sqrt((m*g)/(4*k)) ;
+
+    % setting state space
+    x1 = r(1);
+    x2 = r(2);
+    y1 = r(3);
+    y2 = r(4);
+    z1 = r(5);
+    z2 = r(6);
+    phi1dot = r(7);
+    phi2dot = r(8);
+    theta1dot = r(9);
+    theta2dot = r(10);
+    psi1dot = r(11);
+    psi2dot = r(12);
     
-    % setting state space (prolly wrong rn)
-    z1 = z(1);
-    z2 = z(2);
+    % setting default accelerations
+    x1dot = 0 ;
+    x2dot = 0 ;
+    y1dot = 0 ;
+    y2dot = 0 ;
+    z1dot = 0 ;
+    z2dot = 0 ;
+    phi1dot = 0 ;
+    phi2dot = 0 ;
+    theta1dot = 0 ;
+    theta2dot = 0 ;
+    psi1dot = 0 ;
+    psi2dot = 0 ;
     
+    % part A function
     z1dot = z2;
     if t < 1 
         z2dot = ((4 * k)/m * (OmegaH + 70 * sin(0.5 * pi * t))^2) - g ;
-    elseif t >= 1 
-        z2dot = ((4 * k)/m * (OmegaH - 77 * sin(0.5 * pi * t))^2) - g ;
+    elseif t >= 1 && t <= 2
+        z2dot = ((4 * k)/m * (OmegaH - 77 * sin(0.5 * pi * t))^2) - g ;         
     end
     
+    % part B function
+    T = k*(2 * )
+
     % return
-    rDot = [z1dot; z2dot];
+    rDot = [x1dot; x2dot; y1dot; y2dot; z1dot; z2dot; phi1dot; phi2dot; theta1dot; theta2dot; psi1dot; psi2dot];
 end
 
 
