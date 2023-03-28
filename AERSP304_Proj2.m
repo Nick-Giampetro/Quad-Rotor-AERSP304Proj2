@@ -39,10 +39,10 @@ ylabel('Vz');
 ax = gca ;
 exportgraphics(ax,'vzQ1A.jpg')
 
-%Question 2 Part B
+% Question 2 Part B
 
 
-
+% acceleration equation for Q1 part A
 function    rDot = Q1afun(t,z)
     % pulling consts into function
     g = getG ;
