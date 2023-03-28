@@ -23,7 +23,13 @@ options = odeset('reltol',1e-12,'abstol',1e-12);
 t = linspace(0,2,1000) ;
 [t,z] = ode45(@(t,z) Q1afun(t,z), t , [0,0] , options);
 
- 
+figure
+plot(t,z(:,1))
+title('z(t) vs. t');
+xlabel('t');
+ylabel('z');
+ax = gca ;
+%exportgraphics(ax,'L4_Bframe.jpg')
 
 
 function    rDot = Q1afun(t,z)
