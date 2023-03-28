@@ -29,7 +29,7 @@ title('z(t) vs. t');
 xlabel('t');
 ylabel('z');
 ax = gca ;
-%exportgraphics(ax,'L4_Bframe.jpg')
+exportgraphics(ax,'Q1A.jpg')
 
 
 function    rDot = Q1afun(t,z)
