@@ -6,10 +6,10 @@ clear;
 close all;
 
 % const values
-g = 9.81 ; % m/s
-m = 0.450 ; % kg
+setGlobalG(9.81) ; % m/s
+setGlobalM(0.450) ; % kg
 l = 0.225 ; % 
-k = 2.98*10^-7 ;
+setGlobalK(2.98*10^-7) ;
 b = 1.14*10^-6 ;
 I = [ 4.85*10^-3 , 0, 0 ;
      0 , 4.85*10^-3 , 0 ;
@@ -17,8 +17,8 @@ I = [ 4.85*10^-3 , 0, 0 ;
 
 % Part A
 
-t = linspace(0,2,2000) ;
-z = zeros(2,1);
+t = linspace(0,2,1000) ;
+
 options = odeset('reltol',1e-12,'abstol',1e-12);
 [t,z] = ode45(@(t,z) Q1afun(t,z), t , [0,0] , options);
 
@@ -26,16 +26,53 @@ options = odeset('reltol',1e-12,'abstol',1e-12);
 
 
 
-function    rDot = Q1afun(t,r)
-    r1 = r(1);
-    r2 = r(2);
+function    rDot = Q1afun(t,z)
+    g = getG ;
+    m = getM ;
+    k = getK ;
     
-    r1dot = r2;
+    OmegaH = sqrt((m*g)/(4*k)) ;
+
+    z1 = z(1);
+    z2 = z(2);
+    
+    z1dot = z2;
     if t < 1 
-        r2dot = (4*k)/m*((sqrt((m*g)/(4*k)))+70*sin(0.5*pi*t))^2;
+        z2dot = (4 * k)/m * (OmegaH + 70 * sin(0.5 * pi * t))^2;
     elseif t >= 1 
-        r2dot = (4*k)/m*((sqrt((m*g)/(4*k)))-77*sin(0.5*pi*t))^2;
+        z2dot = (4 * k)/m * (OmegaH - 77 * sin(0.5 * pi * t))^2;
     end
 
-    rDot = [r1dot; r2dot];
+    rDot = [z1dot; z2dot];
+end
+
+
+function setGlobalM(val)
+global m
+m = val;
+end
+
+function r = getM
+global m
+r = m;
+end
+
+function setGlobalK(val)
+global k
+k = val;
+end
+
+function r = getK
+global k
+r = k;
+end
+
+function setGlobalG(val)
+global g
+g = val;
+end
+
+function r = getG
+global g
+r = g;
 end
