@@ -5,7 +5,7 @@ clc;
 clear;
 close all;
 
-% const values
+% setting constants values
 setGlobalG(9.81) ; % m/s
 setGlobalM(0.450) ; % kg
 setGlobalL(0.225) ; % 
@@ -16,23 +16,26 @@ I = [ 4.85*10^-3 , 0, 0 ;
      0 , 4.85*10^-3 , 0 ;
      0 , 0 , 8.80*10^-3 ] ;
 
-% Part A
-
-t = linspace(0,2,1000) ;
-
+% setting ODE45 options
 options = odeset('reltol',1e-12,'abstol',1e-12);
+
+% Part A
+t = linspace(0,2,1000) ;
 [t,z] = ode45(@(t,z) Q1afun(t,z), t , [0,0] , options);
 
  
 
 
 function    rDot = Q1afun(t,z)
+    % pulling consts into function
     g = getG ;
     m = getM ;
     k = getK ;
     
+    % calculating hover omega
     OmegaH = sqrt((m*g)/(4*k)) ;
-
+    
+    % setting state space (prolly wrong rn)
     z1 = z(1);
     z2 = z(2);
     
@@ -42,7 +45,8 @@ function    rDot = Q1afun(t,z)
     elseif t >= 1 
         z2dot = (4 * k)/m * (OmegaH - 77 * sin(0.5 * pi * t))^2;
     end
-
+    
+    % return
     rDot = [z1dot; z2dot];
 end
 
