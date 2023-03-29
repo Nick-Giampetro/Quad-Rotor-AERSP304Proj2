@@ -29,7 +29,7 @@ title('y(t) vs. t');
 xlabel('t');
 ylabel('y');
 ax = gca ;
-exportgraphics(ax,'zQ1A.jpg')
+exportgraphics(ax,'yQ1A.jpg')
 
 figure
 plot(t,d(:,4))
@@ -37,7 +37,7 @@ title('Vy(t) vs. t');
 xlabel('t');
 ylabel('Vy');
 ax = gca ;
-exportgraphics(ax,'vzQ1A.jpg')
+exportgraphics(ax,'vyQ1A.jpg')
 
 figure
 plot(t,d(:,5))
