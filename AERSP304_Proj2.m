@@ -24,12 +24,20 @@ t = linspace(0,4,1000) ;
 [t,d] = ode45(@(t,d) Q1fun(t,d,I), t , [0,0,0,0,0,0,0,0,0,0,0,0] , options);
 
 figure
+plot(t,d(:,7))
+title('phi(t) vs. t');
+xlabel('t');
+ylabel('phi');
+ax = gca ;
+exportgraphics(ax,'phi.jpg')
+
+figure
 plot(t,d(:,3))
 title('y(t) vs. t');
 xlabel('t');
 ylabel('y');
 ax = gca ;
-exportgraphics(ax,'yQ1A.jpg')
+exportgraphics(ax,'y.jpg')
 
 figure
 plot(t,d(:,4))
@@ -37,7 +45,7 @@ title('Vy(t) vs. t');
 xlabel('t');
 ylabel('Vy');
 ax = gca ;
-exportgraphics(ax,'vyQ1A.jpg')
+exportgraphics(ax,'vy.jpg')
 
 figure
 plot(t,d(:,5))
@@ -45,7 +53,7 @@ title('z(t) vs. t');
 xlabel('t');
 ylabel('z');
 ax = gca ;
-exportgraphics(ax,'zQ1A.jpg')
+exportgraphics(ax,'z.jpg')
 
 figure
 plot(t,d(:,6))
@@ -53,7 +61,7 @@ title('Vz(t) vs. t');
 xlabel('t');
 ylabel('Vz');
 ax = gca ;
-exportgraphics(ax,'vzQ1A.jpg')
+exportgraphics(ax,'vz.jpg')
 
 
 
