@@ -108,18 +108,18 @@ function    rDot = Q1fun(t,d,I)
     OmegaH = sqrt((m*g)/(4*k)) ;
 
     % setting state space
-    x1 = d(1);
-    x2 = d(2);
-    y1 = d(3);
-    y2 = d(4);
-    z1 = d(5);
-    z2 = d(6);
-    phi1 = d(7);
-    phi2 = d(8);
-    theta1 = d(9);
-    theta2 = d(10);
-    psi1 = d(11);
-    psi2 = d(12);
+    x1 = d(1) ;
+    x2 = d(2) ;
+    y1 = d(3) ;
+    y2 = d(4) ;
+    z1 = d(5) ;
+    z2 = d(6) ;
+    phi1 = d(7) ;
+    phi2 = d(8) ;
+    theta1 = d(9) ;
+    theta2 = d(10) ;
+    psi1 = d(11) ;
+    psi2 = d(12) ;
 
     phi1dot = phi2 ;
     theta1dot = theta2 ;
