@@ -21,7 +21,7 @@ options = odeset('reltol',1e-12,'abstol',1e-12);
 
 % Question 1 Part A
 t = linspace(0,2,2000) ;
-[t,r] = ode45(@(t,r) Q1fun(t,r,I), t , [0,0,0,0,0,0,0,0,0,0,0,0] , options);
+[t,r] = ode45(@(t,r) Q1fun(t,r,I), t , [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] , options);
 
 figure
 plot(t,r(:,5))
@@ -64,6 +64,10 @@ function    rDot = Q1fun(t,d,I)
     theta2dot = d(10);
     psi1dot = d(11);
     psi2dot = d(12);
+    T1 = d(13);
+    T2 = d(14);
+    T3 = d(15);
+    T4 = d(16);
 
     % setting default accelerations
     x1dot = 0 ;
@@ -83,17 +87,13 @@ function    rDot = Q1fun(t,d,I)
     % part A function
     z1dot = z2;
     if t < 1 
-        T1 = k*(OmegaH + 70 * sin(0.5 * pi * t))^2 ;
-        T2 = k*(OmegaH + 70 * sin(0.5 * pi * t))^2 ;
-        T3 = k*(OmegaH + 70 * sin(0.5 * pi * t))^2 ;
-        T4 = k*(OmegaH + 70 * sin(0.5 * pi * t))^2 ;
-        z2dot = (T1+T2+T3+T4)/m - g ;
+        T1 = (OmegaH + 70 * sin(0.5 * pi * t))^2 ;
+        T2 = (OmegaH + 70 * sin(0.5 * pi * t))^2 ;
+        T3 = (OmegaH + 70 * sin(0.5 * pi * t))^2 ;
+        T4 = (OmegaH + 70 * sin(0.5 * pi * t))^2 ;
+        z2dot = ((4 * k)/m * (OmegaH + 70 * - g ;
     elseif t >= 1 && t <= 2
-        T1 = k*(OmegaH - 77 * sin(0.5 * pi * t))^2 ;
-        T2 = k*(OmegaH - 77 * sin(0.5 * pi * t))^2 ;
-        T3 = k*(OmegaH - 77 * sin(0.5 * pi * t))^2 ;
-        T4 = k*(OmegaH - 77 * sin(0.5 * pi * t))^2 ;
-        z2dot = (T1+T2+T3+T4)/m - g ;
+        z2dot = ((4 * k)/m * (OmegaH - 77 * sin(0.5 * pi * t))^2) - g ;         
     end
     
     % part B function
