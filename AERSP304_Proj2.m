@@ -133,81 +133,64 @@ function    rDot = Q1fun(t,d,I)
     theta2dot = 0 ;
     psi1dot = 0 ;
     psi2dot = 0 ;
-    
+
     % part A function
-    z1dot = z2;
-   
-    if t < 1 
-        T1 = k*(OmegaH + 70 * sin(0.5 * pi * t))^2 ;
-        T2 = k*(OmegaH + 70 * sin(0.5 * pi * t))^2 ;
-        T3 = k*(OmegaH + 70 * sin(0.5 * pi * t))^2 ;
-        T4 = k*(OmegaH + 70 * sin(0.5 * pi * t))^2 ;
-        z2dot = (T1+T2+T3+T4)/m - g ;
-    elseif t >= 1 && t <= 2
-        T1 = k*(OmegaH - 77 * sin(0.5 * pi * t))^2 ;
-        T2 = k*(OmegaH - 77 * sin(0.5 * pi * t))^2 ;
-        T3 = k*(OmegaH - 77 * sin(0.5 * pi * t))^2 ;
-        T4 = k*(OmegaH - 77 * sin(0.5 * pi * t))^2 ;
-        z2dot = (T1+T2+T3+T4)/m - g ;
-    end
-    
-    % part B function
-    T1 = k*OmegaH^2 ;
-    T3 = k*OmegaH^2 ;
-
-    phi1dot = phi2 ;
-    y1dot = y2 ;
-    z1dot = z2 ;
-
-    if t > 2 && t < 3
-        T2 = k*(OmegaH^2 - 70^2 * sin(0.5*pi*(t-2))) ;
-        T4 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-2))) ;
-        L = l*(-T2+T4) ;
-        phi2dot = L/I(1,1) ;
-        y2dot = ((T1+T2+T3+T4)/m) * -sin(phi1) ;
-        z2dot = ((T1+T2+T3+T4)/m) * cos(phi1) - g ;
-    elseif t >=3 && t < 4
-        T2 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-2))) ;
-        T4 = k*(OmegaH^2 - 70^2 * sin(0.5*pi*(t-2))) ;
-        L = l*(-T2+T4) ;
-        phi2dot = L/I(1,1) ;
-        y2dot = ((T1+T2+T3+T4)/m) * -sin(phi1) ;
-        z2dot = ((T1+T2+T3+T4)/m) * cos(phi1) - g ;
-    end
-
-    % part C function
-    T2 = k*OmegaH^2 ;
-    T4 = k*OmegaH^2 ;
-
     phi1dot = phi2 ;
     theta1dot = theta2 ;
     psi1dot = psi2 ;
     x1dot = x2 ;
     y1dot = y2 ;
     z1dot = z2 ;
-
-    if t >= 4 && t < 5
-        T1 = k*(OmegaH^2 - 70^2 * sin(0.5*pi*(t-4))) ;
-        T3 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-4))) ;
-        M = l*(-T1+T3) ;
-        N = (b/k)*(T1-T2+T3-T4);
-        theta2dot = M/I(2,2) ;
-        psi2dot = N/I(3,3) ;
-        x2dot = ((T1+T2+T3+T4)/m) * (cos(psi1)*sin(theta1)*cos(phi1)+sin(psi1)*psi(phi1));
-        y2dot = ((T1+T2+T3+T4)/m) * (sin(phi1)*sin(theta1)*cos(phi1)-cos(psi1)*sin(phi1)) ;
-        z2dot = ((T1+T2+T3+T4)/m) * (cos(phi1)*cos(theta1)) - g ;
-    elseif t >=5 && t <= 6
-        T1 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-4))) ;
-        T3 = k*(OmegaH^2 - 70^2 * sin(0.5*pi*(t-4))) ;
-        M = l*(-T1+T3) ;
-        N = (b/k)*(T1-T2+T3-T4);
-        theta2dot = M/I(2,2) ;
-        psi2dot = N/I(3,3) ;
-        x2dot = ((T1+T2+T3+T4)/m) * (cos(psi1)*sin(theta1)*cos(phi1)+sin(psi1)*psi(phi1));
-        y2dot = ((T1+T2+T3+T4)/m) * (sin(phi1)*sin(theta1)*cos(phi1)-cos(psi1)*sin(phi1)) ;
-        z2dot = ((T1+T2+T3+T4)/m) * (cos(phi1)*cos(theta1)) - g ;
+   
+    if t <= 2
+        if t < 1
+            T1 = k*(OmegaH + 70 * sin(0.5 * pi * t))^2 ;
+            T2 = k*(OmegaH + 70 * sin(0.5 * pi * t))^2 ;
+            T3 = k*(OmegaH + 70 * sin(0.5 * pi * t))^2 ;
+            T4 = k*(OmegaH + 70 * sin(0.5 * pi * t))^2 ;
+        elseif t >= 1 && t <= 2
+            T1 = k*(OmegaH - 77 * sin(0.5 * pi * t))^2 ;
+            T2 = k*(OmegaH - 77 * sin(0.5 * pi * t))^2 ;
+            T3 = k*(OmegaH - 77 * sin(0.5 * pi * t))^2 ;
+            T4 = k*(OmegaH - 77 * sin(0.5 * pi * t))^2 ;
+        end
+    
+    % part B function
+  
+    elseif t > 2 && t < 4
+        T1 = k*OmegaH^2 ;
+        T3 = k*OmegaH^2 ;
+        if t > 2 && t < 3
+            T2 = k*(OmegaH^2 - 70^2 * sin(0.5*pi*(t-2))) ;
+            T4 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-2))) ;
+        elseif t >= 3 && t < 4
+            T2 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-2))) ;
+            T4 = k*(OmegaH^2 - 70^2 * sin(0.5*pi*(t-2))) ;
+        end
+   
+    % part C function
+     
+    elseif t >= 4 && t <= 6
+        T2 = k*OmegaH^2 ;
+        T4 = k*OmegaH^2 ;
+        if t >=4 && t < 5
+            T1 = k*(OmegaH^2 - 70^2 * sin(0.5*pi*(t-4))) ;
+            T3 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-4))) ;
+        elseif t >=5 && t <= 6
+            T1 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-4))) ;
+            T3 = k*(OmegaH^2 - 70^2 * sin(0.5*pi*(t-4))) ;
+        end
     end
-
+    
+    L = l*(-T2+T4) ;
+    M = l*(-T1+T3) ;
+    N = (b/k)*(T1-T2+T3-T4) ;
+    phi2dot = L/I(1,1) ;
+    theta2dot = M/I(2,2) ;
+    psi2dot = N/I(3,3) ;
+    x2dot = ((T1+T2+T3+T4)/m) * (cos(psi1)*sin(theta1)*cos(phi1)+sin(psi1)*sin(phi1)) ;
+    y2dot = ((T1+T2+T3+T4)/m) * (sin(phi1)*sin(theta1)*cos(phi1)-cos(psi1)*sin(phi1)) ;
+    z2dot = ((T1+T2+T3+T4)/m) * (cos(phi1)*cos(theta1)) - g ;
 
     % return
     rDot = [x1dot; x2dot; y1dot; y2dot; z1dot; z2dot; phi1dot; phi2dot; theta1dot; theta2dot; psi1dot; psi2dot];
