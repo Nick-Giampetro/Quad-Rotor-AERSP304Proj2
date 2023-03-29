@@ -19,9 +19,10 @@ I = [ 4.85*10^-3 , 0, 0 ;
 % setting ODE45 options
 options = odeset('reltol',1e-12,'abstol',1e-12);
 
-% Question 1 Part A
+% Question 1
+init = [0,0,0,0,0,0,0,0,0,0,0,0] ;
 t = linspace(0,6,1200) ;
-[t,d] = ode45(@(t,d) Q1fun(t,d,I), t , [0,0,0,0,0,0,0,0,0,0,0,0] , options);
+[t,d] = ode45(@(t,d) Q1fun(t,d,I), t , init , options);
 
 figure
 plot(t,d(:,7))
