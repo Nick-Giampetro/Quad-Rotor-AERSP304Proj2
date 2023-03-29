@@ -20,7 +20,7 @@ I = [ 4.85*10^-3 , 0, 0 ;
 options = odeset('reltol',1e-12,'abstol',1e-12);
 
 % Question 1 Part A
-t = linspace(0,4,1000) ;
+t = linspace(0,6,1200) ;
 [t,d] = ode45(@(t,d) Q1fun(t,d,I), t , [0,0,0,0,0,0,0,0,0,0,0,0] , options);
 
 figure
@@ -32,13 +32,43 @@ ax = gca ;
 exportgraphics(ax,'phi.jpg')
 
 figure
+plot(t,d(:,9))
+title('theta(t) vs. t');
+xlabel('t');
+ylabel('theta');
+ax = gca ;
+exportgraphics(ax,'theta.jpg')
+
+figure
+plot(t,d(:,11))
+title('psi(t) vs. t');
+xlabel('t');
+ylabel('psi');
+ax = gca ;
+exportgraphics(ax,'psi.jpg')
+
+figure
+plot(t,d(:,1))
+title('x(t) vs. t');
+xlabel('t');
+ylabel('x');
+ax = gca ;
+exportgraphics(ax,'x.jpg')
+figure
+plot(t,d(:,2))
+title('Vx(t) vs. t');
+xlabel('t');
+ylabel('Vx');
+ax = gca ;
+exportgraphics(ax,'vx.jpg')
+
+figure
 plot(t,d(:,3))
 title('y(t) vs. t');
 xlabel('t');
 ylabel('y');
 ax = gca ;
 exportgraphics(ax,'y.jpg')
-
 figure
 plot(t,d(:,4))
 title('Vy(t) vs. t');
@@ -54,7 +84,6 @@ xlabel('t');
 ylabel('z');
 ax = gca ;
 exportgraphics(ax,'z.jpg')
-
 figure
 plot(t,d(:,6))
 title('Vz(t) vs. t');
@@ -72,6 +101,7 @@ function    rDot = Q1fun(t,d,I)
     m = getM ;
     k = getK ;
     l = getL ;
+    b = getB ;
     
     % calculating hover omega
     OmegaH = sqrt((m*g)/(4*k)) ;
@@ -106,6 +136,7 @@ function    rDot = Q1fun(t,d,I)
     
     % part A function
     z1dot = z2;
+   
     if t < 1 
         T1 = k*(OmegaH + 70 * sin(0.5 * pi * t))^2 ;
         T2 = k*(OmegaH + 70 * sin(0.5 * pi * t))^2 ;
@@ -124,27 +155,59 @@ function    rDot = Q1fun(t,d,I)
     T1 = k*OmegaH^2 ;
     T3 = k*OmegaH^2 ;
 
+    phi1dot = phi2 ;
+    y1dot = y2 ;
+    z1dot = z2 ;
+
     if t > 2 && t < 3
         T2 = k*(OmegaH^2 - 70^2 * sin(0.5*pi*(t-2))) ;
         T4 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-2))) ;
         L = l*(-T2+T4) ;
-        phi1dot = phi2 ;
         phi2dot = L/I(1,1) ;
-        z1dot = z2 ;
+        y2dot = ((T1+T2+T3+T4)/m) * -sin(phi1) ;
         z2dot = ((T1+T2+T3+T4)/m) * cos(phi1) - g ;
-        y1dot = y2 ;
-        y2dot = ((T1+T2+T3+T4)/m) * sin(phi1) ;
     elseif t >=3 && t < 4
         T2 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-2))) ;
         T4 = k*(OmegaH^2 - 70^2 * sin(0.5*pi*(t-2))) ;
         L = l*(-T2+T4) ;
-        phi1dot = phi2 ;
         phi2dot = L/I(1,1) ;
-        z1dot = z2 ;
+        y2dot = ((T1+T2+T3+T4)/m) * -sin(phi1) ;
         z2dot = ((T1+T2+T3+T4)/m) * cos(phi1) - g ;
-        y1dot = y2 ;
-        y2dot = ((T1+T2+T3+T4)/m) * sin(phi1) ;
     end
+
+    % part C function
+    T2 = k*OmegaH^2 ;
+    T4 = k*OmegaH^2 ;
+
+    phi1dot = phi2 ;
+    theta1dot = theta2 ;
+    psi1dot = psi2 ;
+    x1dot = x2 ;
+    y1dot = y2 ;
+    z1dot = z2 ;
+
+    if t >= 4 && t < 5
+        T1 = k*(OmegaH^2 - 70^2 * sin(0.5*pi*(t-4))) ;
+        T3 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-4))) ;
+        M = l*(-T1+T3) ;
+        N = (b/k)*(T1-T2+T3-T4);
+        theta2dot = M/I(2,2) ;
+        psi2dot = N/I(3,3) ;
+        x2dot = ((T1+T2+T3+T4)/m) * (cos(psi1)*sin(theta1)*cos(phi1)+sin(psi1)*psi(phi1));
+        y2dot = ((T1+T2+T3+T4)/m) * (sin(phi1)*sin(theta1)*cos(phi1)-cos(psi1)*sin(phi1)) ;
+        z2dot = ((T1+T2+T3+T4)/m) * (cos(phi1)*cos(theta1)) - g ;
+    elseif t >=5 && t <= 6
+        T1 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-4))) ;
+        T3 = k*(OmegaH^2 - 70^2 * sin(0.5*pi*(t-4))) ;
+        M = l*(-T1+T3) ;
+        N = (b/k)*(T1-T2+T3-T4);
+        theta2dot = M/I(2,2) ;
+        psi2dot = N/I(3,3) ;
+        x2dot = ((T1+T2+T3+T4)/m) * (cos(psi1)*sin(theta1)*cos(phi1)+sin(psi1)*psi(phi1));
+        y2dot = ((T1+T2+T3+T4)/m) * (sin(phi1)*sin(theta1)*cos(phi1)-cos(psi1)*sin(phi1)) ;
+        z2dot = ((T1+T2+T3+T4)/m) * (cos(phi1)*cos(theta1)) - g ;
+    end
+
 
     % return
     rDot = [x1dot; x2dot; y1dot; y2dot; z1dot; z2dot; phi1dot; phi2dot; theta1dot; theta2dot; psi1dot; psi2dot];
