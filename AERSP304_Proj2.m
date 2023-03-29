@@ -24,6 +24,15 @@ init = [0,0,0,0,0,0,0,0,0,0,0,0] ;
 t = linspace(0,6,1200) ;
 [t,d] = ode45(@(t,d) Q1fun(t,d,I), t , init , options);
 
+%Q1 Plots
+figure
+plot(d(:,1),d(:,3))
+title('x(t) vs. y(t)');
+xlabel('x');
+ylabel('y');
+ax = gca ;
+exportgraphics(ax,'XvY.jpg')
+
 figure
 plot(t,d(:,7))
 title('phi(t) vs. t');
