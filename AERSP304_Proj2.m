@@ -105,7 +105,7 @@ function    rDot = Q1fun(t,d,I)
         T4 = k*(OmegaH + 70 * sin(0.5 * pi * t))^2 ;
         z2dot = (T1+T2+T3+T4)/m - g ;
     elseif t >= 1 && t <= 2
-        T1 = k*(OmegaH - 77 * sin(0.5 * pi * t))^2 
+        T1 = k*(OmegaH - 77 * sin(0.5 * pi * t))^2 ;
         T2 = k*(OmegaH - 77 * sin(0.5 * pi * t))^2 ;
         T3 = k*(OmegaH - 77 * sin(0.5 * pi * t))^2 ;
         T4 = k*(OmegaH - 77 * sin(0.5 * pi * t))^2 ;
@@ -113,7 +113,7 @@ function    rDot = Q1fun(t,d,I)
     end
     
     % part B function
-    T1 = k*OmegaH^2 
+    T1 = k*OmegaH^2 ;
     T3 = k*OmegaH^2 ;
 
     if t > 2 && t < 3
