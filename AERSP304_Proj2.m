@@ -120,21 +120,6 @@ function    rDot = Q1fun(t,d,I)
     psi1 = d(11);
     psi2 = d(12);
 
-    % setting default accelerations
-    x1dot = 0 ;
-    x2dot = 0 ;
-    y1dot = 0 ;
-    y2dot = 0 ;
-    z1dot = 0 ;
-    z2dot = 0 ;
-    phi1dot = 0 ;
-    phi2dot = 0 ;
-    theta1dot = 0 ;
-    theta2dot = 0 ;
-    psi1dot = 0 ;
-    psi2dot = 0 ;
-
-    % part A function
     phi1dot = phi2 ;
     theta1dot = theta2 ;
     psi1dot = psi2 ;
@@ -142,6 +127,7 @@ function    rDot = Q1fun(t,d,I)
     y1dot = y2 ;
     z1dot = z2 ;
    
+    % part A function
     if t <= 2
         if t < 1
             T1 = k*(OmegaH + 70 * sin(0.5 * pi * t))^2 ;
@@ -156,7 +142,6 @@ function    rDot = Q1fun(t,d,I)
         end
     
     % part B function
-  
     elseif t > 2 && t < 4
         T1 = k*OmegaH^2 ;
         T3 = k*OmegaH^2 ;
@@ -167,9 +152,7 @@ function    rDot = Q1fun(t,d,I)
             T2 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-2))) ;
             T4 = k*(OmegaH^2 - 70^2 * sin(0.5*pi*(t-2))) ;
         end
-   
     % part C function
-     
     elseif t >= 4 && t <= 6
         T2 = k*OmegaH^2 ;
         T4 = k*OmegaH^2 ;
@@ -182,6 +165,7 @@ function    rDot = Q1fun(t,d,I)
         end
     end
     
+    % same fundamental equations use for parts A,B,C
     L = l*(-T2+T4) ;
     M = l*(-T1+T3) ;
     N = (b/k)*(T1-T2+T3-T4) ;
