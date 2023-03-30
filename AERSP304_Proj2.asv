@@ -153,32 +153,32 @@ function    rDot = Q1fun(t,d,I)
     
     % part B function
     elseif t > 2 && t < 4
-        Omega1 = OmegaH ;
-        Omega3 = OmegaH ;
+        Omega1 = OmegaH^2 ;
+        Omega3 = k*OmegaH^2 ;
         if t > 2 && t < 3
-            Omega2 = sqrt((OmegaH^2 - 70^2 * sin(0.5*pi*(t-2)))) ;
-            Omega4 = sqrt((OmegaH^2 + 70^2 * sin(0.5*pi*(t-2)))) ;
+            Omega2 = (OmegaH^2 - 70^2 * sin(0.5*pi*(t-2))) ;
+            Omega4 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-2))) ;
         elseif t >= 3 && t < 4
-            Omega2 = sqrt((OmegaH^2 + 70^2 * sin(0.5*pi*(t-2)))) ;
-            Omega4 = sqrt((OmegaH^2 - 70^2 * sin(0.5*pi*(t-2)))) ;
+            Omega2 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-2))) ;
+            Omega4 = k*(OmegaH^2 - 70^2 * sin(0.5*pi*(t-2))) ;
         end
         
     % part C function
     elseif t >= 4 && t <= 6
-        Omega2 = OmegaH ;
-        Omega4 = OmegaH ;
+        Omega2 = k*OmegaH^2 ;
+        Omega4 = k*OmegaH^2 ;
         if t >=4 && t < 5
-            Omega1 = sqrt((OmegaH^2 - 70^2 * sin(0.5*pi*(t-4)))) ;
-            Omega3 = sqrt((OmegaH^2 + 70^2 * sin(0.5*pi*(t-4)))) ;
+            Omega1 = k*(OmegaH^2 - 70^2 * sin(0.5*pi*(t-4))) ;
+            Omega3 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-4))) ;
         elseif t >=5 && t <= 6
-            Omega1 = sqrt((OmegaH^2 + 70^2 * sin(0.5*pi*(t-4)))) ;
-            Omega3 = sqrt((OmegaH^2 - 70^2 * sin(0.5*pi*(t-4)))) ;
+            Omega1 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-4))) ;
+            Omega3 = k*(OmegaH^2 - 70^2 * sin(0.5*pi*(t-4))) ;
         end
     end
     
     % same fundamental equations use for parts A,B,C
     L = l*k*(-Omega2^2+Omega4^2) ; 
-    M = l*k*(-Omega1^2+Omega3^2) ;
+    M = l*(-Omega1^2+Omega3^2) ;
     N = b*(Omega1^2-Omega2^2+Omega3^2-Omega4^2) ;
     phi2dot = L/I(1,1) ;
     theta2dot = M/I(2,2) ;
