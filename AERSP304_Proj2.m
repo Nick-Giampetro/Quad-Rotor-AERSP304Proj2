@@ -25,8 +25,8 @@ t = linspace(0,6,1200) ;
 [t,d] = ode45(@(t,d) Q1fun(t,d,I), t , init , options);
 
 %Q1 Plots
-figure
-plot(d(:,1),d(:,3))
+figure              % DONT THINK WE NEED THIS PLOT
+plot(d(:,1),d(:,3)) 
 title('x(t) vs. y(t)');
 xlabel('x');
 ylabel('y');
@@ -94,6 +94,7 @@ xlabel('t');
 ylabel('z');
 ax = gca ;
 exportgraphics(ax,'z.jpg')
+
 figure
 plot(t,d(:,6))
 title('Vz(t) vs. t');
