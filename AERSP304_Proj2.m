@@ -162,6 +162,7 @@ function    rDot = Q1fun(t,d,I)
             T2 = k*(OmegaH^2 + 70^2 * sin(0.5*pi*(t-2))) ;
             T4 = k*(OmegaH^2 - 70^2 * sin(0.5*pi*(t-2))) ;
         end
+        
     % part C function
     elseif t >= 4 && t <= 6
         T2 = k*OmegaH^2 ;
@@ -176,7 +177,7 @@ function    rDot = Q1fun(t,d,I)
     end
     
     % same fundamental equations use for parts A,B,C
-    L = l*(-T2+T4) ;
+    L = l*(-T2+T4) ; 
     M = l*(-T1+T3) ;
     N = (b/k)*(T1-T2+T3-T4) ;
     phi2dot = L/I(1,1) ;
