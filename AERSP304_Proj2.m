@@ -21,7 +21,7 @@ options = odeset('reltol',1e-12,'abstol',1e-12);
 
 % Question 1
 init = [0,0,0,0,0,0,0,0,0,0,0,0] ;
-t = linspace(0,6,6000) ;
+t = linspace(0,6,1200) ;
 [t,d] = ode45(@(t,d) Q1fun(t,d,I), t , init , options);
 
 %Q1 Plots
@@ -106,7 +106,7 @@ exportgraphics(ax,'vz.jpg')
 
 
 % acceleration equation for Q1
-function    rDot = Q1fun(t,d,I)
+function    dDot = Q1fun(t,d,I)
     % pulling consts into function
     g = getG ;
     m = getM ;
@@ -124,16 +124,13 @@ function    rDot = Q1fun(t,d,I)
     y2 = d(4) ;
     z1 = d(5) ;
     z2 = d(6) ;
-    phi1 = d(7) ;
-    phi2 = d(8) ;
-    theta1 = d(9) ;
-    theta2 = d(10) ;
-    psi1 = d(11) ;
-    psi2 = d(12) ;
+    phi = d(7) ;
+    p = d(8) ;
+    theta = d(9) ;
+    q = d(10) ;
+    psi = d(11) ;
+    r = d(12) ;
 
-    phi1dot = phi2 ;
-    theta1dot = theta2 ;
-    psi1dot = psi2 ;
     x1dot = x2 ;
     y1dot = y2 ;
     z1dot = z2 ;
@@ -177,19 +174,31 @@ function    rDot = Q1fun(t,d,I)
         end
     end
     
+    A = [ 1 , 0, sin(theta) ;
+          0 , cos(phi) , cos(theta)*sin(phi) ;
+          0 , -sin(phi) , cos(theta)*cos(phi) ] ;
+    
+    inA = inv(A);
+
     % same fundamental equations use for parts A,B,C
     L = l*k*(-Omega2^2+Omega4^2) ; 
     M = l*k*(-Omega1^2+Omega3^2) ;
     N = b*(Omega1^2-Omega2^2+Omega3^2-Omega4^2) ;
-    phi2dot = L/I(1,1) ;
-    theta2dot = M/I(2,2) ;
-    psi2dot = N/I(3,3) ;
-    x2dot = (k*(Omega1^2+Omega2^2+Omega3^2+Omega4^2)/m) * (cos(psi1)*sin(theta1)*cos(phi1)+sin(psi1)*sin(phi1)) ;
-    y2dot = (k*(Omega1^2+Omega2^2+Omega3^2+Omega4^2)/m) * (sin(phi1)*sin(theta1)*cos(phi1)-cos(psi1)*sin(phi1)) ;
-    z2dot = (k*(Omega1^2+Omega2^2+Omega3^2+Omega4^2)/m) * (cos(phi1)*cos(theta1)) - g ;
+    
+    pdot = ((q*r*(I(3,3)-I(2,2))) + L)/I(1,1) ;
+    rdot = ((p*r*(I(1,1)-I(3,3))) + M)/I(2,2) ;
+    qdot = ((p*q*(I(2,2)-I(1,1))) + N)/I(3,3) ;
+
+    phidot = inA(1,:) * [p,q,r]' ;
+    thetadot = inA(2,:) * [p,q,r]' ;
+    psidot = inA(3,:) * [p,q,r]' ;
+
+    x2dot = (k*(Omega1^2+Omega2^2+Omega3^2+Omega4^2)/m) * (cos(psi)*sin(theta)*cos(phi)+sin(psi)*sin(phi)) ;
+    y2dot = (k*(Omega1^2+Omega2^2+Omega3^2+Omega4^2)/m) * (sin(phi)*sin(theta)*cos(phi)-cos(psi)*sin(phi)) ;
+    z2dot = (k*(Omega1^2+Omega2^2+Omega3^2+Omega4^2)/m) * (cos(phi)*cos(theta)) - g ;
 
     % return
-    rDot = [x1dot; x2dot; y1dot; y2dot; z1dot; z2dot; phi1dot; phi2dot; theta1dot; theta2dot; psi1dot; psi2dot];
+    dDot = [x1dot; x2dot; y1dot; y2dot; z1dot; z2dot; phidot; pdot; thetadot; qdot; psidot; rdot];
 end
 
 
