@@ -186,8 +186,8 @@ function    dDot = Q1fun(t,d,I)
     N = b*(Omega1^2-Omega2^2+Omega3^2-Omega4^2) ;
     
     pdot = ((q*r*(I(3,3)-I(2,2))) + L)/I(1,1) ;
-    rdot = ((p*r*(I(1,1)-I(3,3))) + M)/I(2,2) ;
-    qdot = ((p*q*(I(2,2)-I(1,1))) + N)/I(3,3) ;
+    qdot = ((p*r*(I(1,1)-I(3,3))) + M)/I(2,2) ;
+    rdot = ((p*q*(I(2,2)-I(1,1))) + N)/I(3,3) ;
 
     phidot = inA(1,:) * [p,q,r]' ;
     thetadot = inA(2,:) * [p,q,r]' ;
