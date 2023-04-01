@@ -27,9 +27,7 @@ t = linspace(0,6,1200) ;
 % Question 2
 init = [0,0,0,0,0,0,0,0,0,0,0,0] ;
 t = linspace(0,6,1200) ;
-[t,a] = ode45(@(t,d) Q2fun(t,d,I,[0,0,10,0,0,0]), t , init , options);
-
-
+[t,a] = ode45(@(t,d) Q2fun(t,d,I,[10,0,0,0,0,0,0,0]), t , init , options);
 
 
 %Q1 Plots
@@ -244,15 +242,16 @@ function    dDot = Q2fun(t,d,I,rS)
 
     % governing physics
 
-    A = [ 1 , 0, sin(theta) ;
+    A = [ 1 , 0 , sin(theta) ;
           0 , cos(phi) , cos(theta)*sin(phi) ;
           0 , -sin(phi) , cos(theta)*cos(phi) ] ;
     
     inA = inv(A);
 
-    L = l*k*(-Omega2^2+Omega4^2) ; 
-    M = l*k*(-Omega1^2+Omega3^2) ;
-    N = b*(Omega1^2-Omega2^2+Omega3^2-Omega4^2) ;
+    T = (g + (rS(2)-z2) + (rS(1)-z1)) * m/(cos(phi)*cos(theta)) ;
+    L = I(1,1) * ((rS(3)-phidot) + (rS(4)-phi)) ; 
+    M = I(2,2) * ((rS(5)-thetadot) + (rS(6)-theta)) ;
+    N = I(3,3) * ((rS(7)-psidot) + (rS(8)-psi)) ;
 
     pdot = ((q*r*(I(3,3)-I(2,2))) + L)/I(1,1) ;
     qdot = ((p*r*(I(1,1)-I(3,3))) + M)/I(2,2) ;
@@ -262,9 +261,9 @@ function    dDot = Q2fun(t,d,I,rS)
     thetadot = inA(2,:) * [p,q,r]' ;
     psidot = inA(3,:) * [p,q,r]' ;
 
-    x2dot = (k*(Omega1^2+Omega2^2+Omega3^2+Omega4^2)/m) * (cos(psi)*sin(theta)*cos(phi)+sin(psi)*sin(phi)) ;
-    y2dot = (k*(Omega1^2+Omega2^2+Omega3^2+Omega4^2)/m) * (sin(phi)*sin(theta)*cos(phi)-cos(psi)*sin(phi)) ;
-    z2dot = (k*(Omega1^2+Omega2^2+Omega3^2+Omega4^2)/m) * (cos(phi)*cos(theta)) - g ;
+    x2dot = (T/m) * (cos(psi)*sin(theta)*cos(phi)+sin(psi)*sin(phi)) ;
+    y2dot = (T/m) * (sin(phi)*sin(theta)*cos(phi)-cos(psi)*sin(phi)) ;
+    z2dot = (T/m) * (cos(phi)*cos(theta)) - g ;
 
     % return
     dDot = [x1dot; x2dot; y1dot; y2dot; z1dot; z2dot; phidot; pdot; thetadot; qdot; psidot; rdot];
