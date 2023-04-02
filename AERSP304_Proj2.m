@@ -24,109 +24,116 @@ init = [0,0,0,0,0,0,0,0,0,0,0,0] ;
 t = linspace(0,6,1200) ;
 [t,d] = ode45(@(t,d) Q1fun(t,d,I), t , init , options);
 
-%{
-% Question 2
+ploter(t,d,'1')
+
+
+
+%Question 2
 init = [0,0,0,0,0,0,0,0,0,0,0,0] ;
-t = linspace(0,120,1200) ;
+t = linspace(0,120,2400) ;
 [t,a] = ode45(@(t,d) Q2fun(t,d,I,[10,0,0,0,0,0,0,0]), t , init , options);
-%}
 
-%Q1 Plots
-figure
-plot(t,d(:,7))
-title('phi(t) vs. t');
-xlabel('t');
-ylabel('phi');
-ax = gca ;
-exportgraphics(ax,'phi.jpg')
+ploter(t,a,'2')
 
-figure
-plot(t,d(:,9))
-title('theta(t) vs. t');
-xlabel('t');
-ylabel('theta');
-ax = gca ;
-exportgraphics(ax,'theta.jpg')
 
-figure
-plot(t,d(:,11))
-title('psi(t) vs. t');
-xlabel('t');
-ylabel('psi');
-ax = gca ;
-exportgraphics(ax,'psi.jpg')
+function ploter(t,x,Q)
+    figure
+    plot(t,x(:,7))
+    title('phi(t) vs. t');
+    xlabel('t');
+    ylabel('phi');
+    ax = gca ;
+    exportgraphics(ax,['phiQ' Q '.jpg'])
 
-figure
-plot(t,d(:,1))
-title('x(t) vs. t');
-xlabel('t');
-ylabel('x');
-ax = gca ;
-exportgraphics(ax,'x.jpg')
+    figure
+    plot(t,x(:,9))
+    title('theta(t) vs. t');
+    xlabel('t');
+    ylabel('theta');
+    ax = gca ;
+    exportgraphics(ax,['theta' Q '.jpg'])
 
-figure
-plot(t,d(:,2))
-title('Vx(t) vs. t');
-xlabel('t');
-ylabel('Vx');
-ax = gca ;
-exportgraphics(ax,'vx.jpg')
+    figure
+    plot(t,x(:,11))
+    title('psi(t) vs. t');
+    xlabel('t');
+    ylabel('psi');
+    ax = gca ;
+    exportgraphics(ax,['psi' Q '.jpg'])
 
-figure
-plot(t,d(:,3))
-title('y(t) vs. t');
-xlabel('t');
-ylabel('y');
-ax = gca ;
-exportgraphics(ax,'y.jpg')
+    figure
+    plot(t,x(:,1))
+    title('x(t) vs. t');
+    xlabel('t');
+    ylabel('x');
+    ax = gca ;
+    exportgraphics(ax,['x' Q '.jpg'])
 
-figure
-plot(t,d(:,4))
-title('Vy(t) vs. t');
-xlabel('t');
-ylabel('Vy');
-ax = gca ;
-exportgraphics(ax,'vy.jpg')
+    figure
+    plot(t,x(:,2))
+    title('Vx(t) vs. t');
+    xlabel('t');
+    ylabel('Vx');
+    ax = gca ;
+    exportgraphics(ax,['vx' Q '.jpg'])
 
-figure
-plot(t,d(:,5))
-title('z(t) vs. t');
-xlabel('t');
-ylabel('z');
-ax = gca ;
-exportgraphics(ax,'z.jpg')
+    figure
+    plot(t,x(:,3))
+    title('y(t) vs. t');
+    xlabel('t');
+    ylabel('y');
+    ax = gca ;
+    exportgraphics(ax,['y' Q '.jpg'])
 
-figure
-plot(t,d(:,6))
-title('Vz(t) vs. t');
-xlabel('t');
-ylabel('Vz');
-ax = gca ;
-exportgraphics(ax,'vz.jpg')
+    figure
+    plot(t,x(:,4))
+    title('Vy(t) vs. t');
+    xlabel('t');
+    ylabel('Vy');
+    ax = gca ;
+    exportgraphics(ax,['vy' Q '.jpg'])
 
-figure
-plot(t,d(:,8))
-title('Pvel(t) vs. t');
-xlabel('t');
-ylabel('Pvel');
-ax = gca ;
-exportgraphics(ax,'pvel.jpg')
+    figure
+    plot(t,x(:,5))
+    title('z(t) vs. t');
+    xlabel('t');
+    ylabel('z');
+    ax = gca ;
+    exportgraphics(ax,['z' Q '.jpg'])
 
-figure
-plot(t,d(:,10))
-title('Qvel(t) vs. t');
-xlabel('t');
-ylabel('Qvel');
-ax = gca ;
-exportgraphics(ax,'qvel.jpg')
+    figure
+    plot(t,x(:,6))
+    title('Vz(t) vs. t');
+    xlabel('t');
+    ylabel('Vz');
+    ax = gca ;
+    exportgraphics(ax,['vz' Q '.jpg'])
+    
+    figure
+    plot(t,x(:,8))
+    title('Pvel(t) vs. t');
+    xlabel('t');
+    ylabel('Pvel');
+    ax = gca ;
+    exportgraphics(ax,['pvel' Q '.jpg'])
 
-figure                      % questionable about how R vs t looks
-plot(t,d(:,12))
-title('Rvel(t) vs. t');
-xlabel('t');
-ylabel('Rvel');
-ax = gca ;
-exportgraphics(ax,'rvel.jpg')
+    figure
+    plot(t,x(:,10))
+    title('Qvel(t) vs. t');
+    xlabel('t');
+    ylabel('Qvel');
+    ax = gca ;
+    exportgraphics(ax,['qvel' Q '.jpg'])
+
+    figure                      % questionable about how R vs t looks
+    plot(t,x(:,12))
+    title('Rvel(t) vs. t');
+    xlabel('t');
+    ylabel('Rvel');
+    ax = gca ;
+    exportgraphics(ax,['rvel' Q '.jpg'])
+
+end
 
 % acceleration equation for Q1
 function    dDot = Q1fun(t,d,I)
@@ -224,7 +231,7 @@ function    dDot = Q1fun(t,d,I)
     dDot = [x1dot; x2dot; y1dot; y2dot; z1dot; z2dot; phidot; pdot; thetadot; qdot; psidot; rdot];
 end
 
-%{
+
 function    dDot = Q2fun(t,d,I,rS)
     % pulling consts into function
     g = getG ;
@@ -233,8 +240,6 @@ function    dDot = Q2fun(t,d,I,rS)
     l = getL ;
     b = getB ;
     
-    % calculating hover omega
-    OmegaH = sqrt((m*g)/(4*k)) ;
 
     % setting state space
     x1 = d(1) ;             % x position
@@ -253,9 +258,6 @@ function    dDot = Q2fun(t,d,I,rS)
     x1dot = x2 ;
     y1dot = y2 ;
     z1dot = z2 ;
-    
-  
-    
 
     % governing physics
 
@@ -264,11 +266,15 @@ function    dDot = Q2fun(t,d,I,rS)
           0 , -sin(phi) , cos(theta)*cos(phi) ] ;
     
     inA = inv(A);
+    
+    phi2 = inA(1,:) * [p,q,r]' ;
+    theta2 = inA(2,:) * [p,q,r]' ;
+    psi2= inA(3,:) * [p,q,r]' ;
 
     T = (g + (rS(2)-z2) + (rS(1)-z1)) * m/(cos(phi)*cos(theta)) ;
-    L = I(1,1) * ((rS(3)-phidot) + (rS(4)-phi)) ; 
-    M = I(2,2) * ((rS(5)-thetadot) + (rS(6)-theta)) ;
-    N = I(3,3) * ((rS(7)-psidot) + (rS(8)-psi)) ;
+    L = I(1,1) * ((rS(3)-phi2) + (rS(4)-phi)) ; 
+    M = I(2,2) * ((rS(5)-theta2) + (rS(6)-theta)) ;
+    N = I(3,3) * ((rS(7)-psi2) + (rS(8)-psi)) ;
 
     pdot = ((q*r*(I(3,3)-I(2,2))) + L)/I(1,1) ;
     qdot = ((p*r*(I(1,1)-I(3,3))) + M)/I(2,2) ;
@@ -285,7 +291,7 @@ function    dDot = Q2fun(t,d,I,rS)
     % return
     dDot = [x1dot; x2dot; y1dot; y2dot; z1dot; z2dot; phidot; pdot; thetadot; qdot; psidot; rdot];
 end
-%}
+
 
 % GLOBAL VARIABLES
 
