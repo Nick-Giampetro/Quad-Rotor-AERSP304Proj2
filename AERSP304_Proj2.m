@@ -271,7 +271,7 @@ function    dDot = Q2fun(t,d,I,rS)
     theta2 = inA(2,:) * [p,q,r]' ;
     psi2= inA(3,:) * [p,q,r]' ;
 
-    T = (g + (rS(2)-z2) + (rS(1)-z1)) * m/(cos(phi)*cos(theta)) ;
+    T = (g + (rS(2)-z2) + (rS(1)-z1)) * (m/(cos(phi)*cos(theta))) ;
     L = I(1,1) * ((rS(3)-phi2) + (rS(4)-phi)) ; 
     M = I(2,2) * ((rS(5)-theta2) + (rS(6)-theta)) ;
     N = I(3,3) * ((rS(7)-psi2) + (rS(8)-psi)) ;
