@@ -38,45 +38,38 @@ ploter(t,a,'2')
 
 function ploter(t,x,Q)
     figure
+    subplot(2,3,1)
     plot(t,x(:,7))
     title('phi(t) vs. t');
     xlabel('t');
     ylabel('phi');
-    ax = gca ;
-    exportgraphics(ax,['phiQ' Q '.jpg'])
 
-    figure
-    subplot(2,3,1)
+    subplot(2,3,2)
     plot(t,x(:,9))
     title('theta(t) vs. t');
     xlabel('t');
     ylabel('theta');
 
-    subplot(2,3,2)
+    subplot(2,3,3)
     plot(t,x(:,11))
     title('psi(t) vs. t');
     xlabel('t');
     ylabel('psi');
-
-    subplot(2,3,3)
+    
+    subplot(2,3,[4,6])
+    plot(t,x(:,9),'r',t,x(:,11),'g',t,x(:,1),'b')
+    ylim([0,0.06]);
+    ax = gca ;
+    exportgraphics(ax,['Euler Angles' Q '.jpg'])
+    
+    figure
     plot(t,x(:,1))
     title('x(t) vs. t');
     xlabel('t');
     ylabel('x');
+    ax = gca;
+    exportgraphics(ax,['x' Q '.jpg'])
     
-    subplot(2,3,[4,6])
-    plot(t,x(:,9),'r',t,x(:,11),'g',t,x(:,1),'b')
-    ax = gca ;
-    exportgraphics(ax,['Euler Angles' Q '.jpg'])
-
-    figure
-    plot(t,x(:,2))
-    title('Vx(t) vs. t');
-    xlabel('t');
-    ylabel('Vx');
-    ax = gca ;
-    exportgraphics(ax,['vx' Q '.jpg'])
-
     figure
     plot(t,x(:,3))
     title('y(t) vs. t');
@@ -84,6 +77,14 @@ function ploter(t,x,Q)
     ylabel('y');
     ax = gca ;
     exportgraphics(ax,['y' Q '.jpg'])
+    
+    figure
+    plot(t,x(:,2))
+    title('Vx(t) vs. t');
+    xlabel('t');
+    ylabel('Vx');
+    ax = gca ;
+    exportgraphics(ax,['vx' Q '.jpg'])
 
     figure
     plot(t,x(:,4))

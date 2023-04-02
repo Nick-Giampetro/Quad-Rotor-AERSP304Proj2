@@ -63,12 +63,25 @@ function ploter(t,x,Q)
     exportgraphics(ax,['Euler Angles' Q '.jpg'])
     
     figure
+    subplot(2,3,1)
     plot(t,x(:,1))
     title('x(t) vs. t');
     xlabel('t');
     ylabel('x');
-    ax = gca;
-    exportgraphics(ax,['x' Q '.jpg'])
+    
+    subplot(2,3,1)
+    plot(t,x(:,3))
+    title('y(t) vs. t');
+    xlabel('t');
+    ylabel('y');
+    
+    subplot(2,3,3)
+    plot(t,x(:,5))
+    title('z(t) vs. t');
+    xlabel('t');
+    ylabel('z');
+    ax = gca ;
+    exportgraphics(ax,['z' Q '.jpg'])
     
     figure
     plot(t,x(:,2))
@@ -79,14 +92,6 @@ function ploter(t,x,Q)
     exportgraphics(ax,['vx' Q '.jpg'])
 
     figure
-    plot(t,x(:,3))
-    title('y(t) vs. t');
-    xlabel('t');
-    ylabel('y');
-    ax = gca ;
-    exportgraphics(ax,['y' Q '.jpg'])
-
-    figure
     plot(t,x(:,4))
     title('Vy(t) vs. t');
     xlabel('t');
@@ -94,13 +99,7 @@ function ploter(t,x,Q)
     ax = gca ;
     exportgraphics(ax,['vy' Q '.jpg'])
 
-    figure
-    plot(t,x(:,5))
-    title('z(t) vs. t');
-    xlabel('t');
-    ylabel('z');
-    ax = gca ;
-    exportgraphics(ax,['z' Q '.jpg'])
+
 
     figure
     plot(t,x(:,6))
