@@ -113,7 +113,7 @@ exportgraphics(ax,'vz.jpg')
 
 % acceleration equation for Q1
 function    dDot = Q1fun(t,d,I)
-    % pulling consts into function
+    % pulling constants into function
     g = getG ;
     m = getM ;
     k = getK ;
