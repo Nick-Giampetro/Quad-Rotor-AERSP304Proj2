@@ -180,7 +180,7 @@ function    dDot = Q1fun(t,d,I)
         end
     end
     
-    A = [ 1 , 0, sin(theta) ;
+    A = [ 1 , 0, -sin(theta) ;
           0 , cos(phi) , cos(theta)*sin(phi) ;
           0 , -sin(phi) , cos(theta)*cos(phi) ] ;
     
