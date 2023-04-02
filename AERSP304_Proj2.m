@@ -279,7 +279,7 @@ function    dDot = Q2fun(t,d,I,rS)
     psidot = inA(3,:) * [p,q,r]' ;
 
     x2dot = (T/m) * (cos(psi)*sin(theta)*cos(phi)+sin(psi)*sin(phi)) ;
-    y2dot = (T/m) * (sin(phi)*sin(theta)*cos(phi)-cos(psi)*sin(phi)) ;
+    y2dot = (T/m) * (sin(psi)*sin(theta)*cos(phi)-cos(psi)*sin(phi)) ;
     z2dot = (T/m) * (cos(phi)*cos(theta)) - g ;
 
     % return
