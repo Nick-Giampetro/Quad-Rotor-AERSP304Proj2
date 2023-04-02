@@ -24,21 +24,14 @@ init = [0,0,0,0,0,0,0,0,0,0,0,0] ;
 t = linspace(0,6,1200) ;
 [t,d] = ode45(@(t,d) Q1fun(t,d,I), t , init , options);
 
+%{
 % Question 2
 init = [0,0,0,0,0,0,0,0,0,0,0,0] ;
 t = linspace(0,6,1200) ;
 [t,a] = ode45(@(t,d) Q2fun(t,d,I,[10,0,0,0,0,0,0,0]), t , init , options);
-
+%}
 
 %Q1 Plots
-figure              % DONT THINK WE NEED THIS PLOT
-plot(d(:,1),d(:,3)) 
-title('x(t) vs. y(t)');
-xlabel('x');
-ylabel('y');
-ax = gca ;
-exportgraphics(ax,'XvY.jpg')
-
 figure
 plot(t,d(:,7))
 title('phi(t) vs. t');
@@ -70,6 +63,7 @@ xlabel('t');
 ylabel('x');
 ax = gca ;
 exportgraphics(ax,'x.jpg')
+
 figure
 plot(t,d(:,2))
 title('Vx(t) vs. t');
@@ -85,6 +79,7 @@ xlabel('t');
 ylabel('y');
 ax = gca ;
 exportgraphics(ax,'y.jpg')
+
 figure
 plot(t,d(:,4))
 title('Vy(t) vs. t');
@@ -109,7 +104,29 @@ ylabel('Vz');
 ax = gca ;
 exportgraphics(ax,'vz.jpg')
 
+figure
+plot(t,d(:,8))
+title('Pvel(t) vs. t');
+xlabel('t');
+ylabel('Pvel');
+ax = gca ;
+exportgraphics(ax,'pvel.jpg')
 
+figure
+plot(t,d(:,10))
+title('Qvel(t) vs. t');
+xlabel('t');
+ylabel('Qvel');
+ax = gca ;
+exportgraphics(ax,'qvel.jpg')
+
+figure                      % questionable about how R vs t looks
+plot(t,d(:,12))
+title('Rvel(t) vs. t');
+xlabel('t');
+ylabel('Rvel');
+ax = gca ;
+exportgraphics(ax,'rvel.jpg')
 
 % acceleration equation for Q1
 function    dDot = Q1fun(t,d,I)
@@ -207,7 +224,7 @@ function    dDot = Q1fun(t,d,I)
     dDot = [x1dot; x2dot; y1dot; y2dot; z1dot; z2dot; phidot; pdot; thetadot; qdot; psidot; rdot];
 end
 
-
+%{
 function    dDot = Q2fun(t,d,I,rS)
     % pulling consts into function
     g = getG ;
@@ -268,7 +285,7 @@ function    dDot = Q2fun(t,d,I,rS)
     % return
     dDot = [x1dot; x2dot; y1dot; y2dot; z1dot; z2dot; phidot; pdot; thetadot; qdot; psidot; rdot];
 end
-
+%}
 
 % GLOBAL VARIABLES
 
