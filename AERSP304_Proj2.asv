@@ -33,25 +33,31 @@ init = [0,0,0,0,1,0,10*pi/180,0,10*pi/180,0,10*pi/180,0] ;
 t = linspace(0,120,2400) ;
 [t,a] = ode45(@(t,d) Q2fun(t,d,I,[10,0,0,0,0,0,0,0]), t , init , options);
 
+
+omega_1 = sqrt((T/(4*k))-(M/(2*k*l))+(N/(4*b)))
+omega_2 = sqrt((T/(4*k))-(L/(2*k*l))-(N/(4*b)))
+omega_3 = sqrt((T/(4*k))+(M/(2*k*l))+(N/(4*b)))
+omega_4 = sqrt((T/(4*k))+(L/(2*k*l))-(N/(4*b)))
+
 ploter(t,a,'2')
 
 
 function ploter(t,x,Q)
     figure
     subplot(2,3,1)
-    plot(t,x(:,7))
+    plot(t,x(:,7),'r')
     title('phi(t) vs. t');
     xlabel('t');
     ylabel('phi');
 
     subplot(2,3,2)
-    plot(t,x(:,9))
+    plot(t,x(:,9),'g')
     title('theta(t) vs. t');
     xlabel('t');
     ylabel('theta');
 
     subplot(2,3,3)
-    plot(t,x(:,11))
+    plot(t,x(:,11),'b')
     title('psi(t) vs. t');
     xlabel('t');
     ylabel('psi');
@@ -130,9 +136,9 @@ function ploter(t,x,Q)
     ylabel('Rvel');
     
     subplot(2,3,[4,6])
-    plot(t,x(:,8),
+    plot(t,x(:,8),'r',t,x(:,10),'g',t,x(:,12),'b')
     ax = gca ;
-    exportgraphics(ax,['rvel' Q '.jpg'])
+    exportgraphics(ax,['body rates' Q '.jpg'])
 
 end
 

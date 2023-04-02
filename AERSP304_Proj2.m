@@ -33,6 +33,12 @@ init = [0,0,0,0,1,0,10*pi/180,0,10*pi/180,0,10*pi/180,0] ;
 t = linspace(0,120,2400) ;
 [t,a] = ode45(@(t,d) Q2fun(t,d,I,[10,0,0,0,0,0,0,0]), t , init , options);
 
+
+omega_1 = sqrt((T/(4*k))-(M/(2*k*l))+(N/(4*b)))
+omega_2 = sqrt((T/(4*k))-(L/(2*k*l))-(N/(4*b)))
+omega_3 = sqrt((T/(4*k))+(M/(2*k*l))+(N/(4*b)))
+omega_4 = sqrt((T/(4*k))+(L/(2*k*l))-(N/(4*b)))
+
 ploter(t,a,'2')
 
 
