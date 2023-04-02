@@ -200,7 +200,7 @@ function    dDot = Q1fun(t,d,I)
     psidot = inA(3,:) * [p,q,r]' ;
 
     x2dot = (k*(Omega1^2+Omega2^2+Omega3^2+Omega4^2)/m) * (cos(psi)*sin(theta)*cos(phi)+sin(psi)*sin(phi)) ;
-    y2dot = (k*(Omega1^2+Omega2^2+Omega3^2+Omega4^2)/m) * (sin(phi)*sin(theta)*cos(phi)-cos(psi)*sin(phi)) ;
+    y2dot = (k*(Omega1^2+Omega2^2+Omega3^2+Omega4^2)/m) * (sin(psi)*sin(theta)*cos(phi)-cos(psi)*sin(phi)) ;
     z2dot = (k*(Omega1^2+Omega2^2+Omega3^2+Omega4^2)/m) * (cos(phi)*cos(theta)) - g ;
 
     % return
