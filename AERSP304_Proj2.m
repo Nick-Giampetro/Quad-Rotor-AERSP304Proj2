@@ -187,9 +187,9 @@ function    dDot = Q1fun(t,d,I)
     inA = inv(A);
 
     % same fundamental equations use for parts A,B,C
-    L = l*k*(-Omega2^2+Omega4^2) ; 
-    M = l*k*(-Omega1^2+Omega3^2) ;
-    N = b*(Omega1^2-Omega2^2+Omega3^2-Omega4^2) ;
+    L = l*k*(-Omega2^2+Omega4^2) ;                       % Roll Moment
+    M = l*k*(-Omega1^2+Omega3^2) ;                       % Pitch Moment
+    N = b*(Omega1^2-Omega2^2+Omega3^2-Omega4^2) ;        % Yaw Moment
 
     pdot = ((q*r*(I(3,3)-I(2,2))) + L)/I(1,1) ;
     qdot = ((p*r*(I(1,1)-I(3,3))) + M)/I(2,2) ;
