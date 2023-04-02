@@ -141,18 +141,18 @@ function    dDot = Q1fun(t,d,I)
     OmegaH = sqrt((m*g)/(4*k)) ;
 
     % setting state space
-    x1 = d(1) ;
-    x2 = d(2) ;
-    y1 = d(3) ;
-    y2 = d(4) ;
-    z1 = d(5) ;
-    z2 = d(6) ;
-    phi = d(7) ;
-    p = d(8) ;
-    theta = d(9) ;
-    q = d(10) ;
-    psi = d(11) ;
-    r = d(12) ;
+    x1 = d(1) ;         % x position
+    x2 = d(2) ;         % x velocity
+    y1 = d(3) ;         % y position
+    y2 = d(4) ;         % y velocity
+    z1 = d(5) ;         % z position
+    z2 = d(6) ;         % z velocity
+    phi = d(7) ;        % phi
+    p = d(8) ;          % p
+    theta = d(9) ;      % theta
+    q = d(10) ;         % q
+    psi = d(11) ;       % psi
+    r = d(12) ;         % r
 
     x1dot = x2 ;
     y1dot = y2 ;
