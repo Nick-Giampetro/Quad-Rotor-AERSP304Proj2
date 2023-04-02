@@ -57,7 +57,7 @@ function ploter(t,x,Q)
     ylabel('psi');
     
     subplot(2,3,[4,6])
-    plot(t,x(:,9),'r',t,x(:,11),'g',t,x(:,1),'b')
+    plot(t,x(:,7),'r',t,x(:,9),'g',t,x(:,11),'b')
     ylim([0,0.06]);
     ax = gca ;
     exportgraphics(ax,['Euler Angles' Q '.jpg'])
@@ -111,28 +111,28 @@ function ploter(t,x,Q)
     exportgraphics(ax,['velocity' Q '.jpg'])
     
     figure
-    plot(t,x(:,8))
+    subplot(2,3,1)
+    plot(t,x(:,8),'r')
     title('Pvel(t) vs. t');
     xlabel('t');
     ylabel('Pvel');
-    ax = gca ;
-    exportgraphics(ax,['pvel' Q '.jpg'])
 
-    figure
-    plot(t,x(:,10))
+    subplot(2,3,2)
+    plot(t,x(:,10),'g')
     title('Qvel(t) vs. t');
     xlabel('t');
     ylabel('Qvel');
-    ax = gca ;
-    exportgraphics(ax,['qvel' Q '.jpg'])
 
-    figure                      % questionable about how R vs t looks
-    plot(t,x(:,12))
+    subplot(2,3,3)                      % questionable about how R vs t looks
+    plot(t,x(:,12),'b')
     title('Rvel(t) vs. t');
     xlabel('t');
     ylabel('Rvel');
+    
+    subplot(2,3,[4,6])
+    plot(t,x(:,8),'r',t,x(:,10),'g',t,x(:,12),'b')
     ax = gca ;
-    exportgraphics(ax,['rvel' Q '.jpg'])
+    exportgraphics(ax,['body rates' Q '.jpg'])
 
 end
 
