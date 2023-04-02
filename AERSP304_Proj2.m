@@ -191,7 +191,7 @@ function    dDot = Q1fun(t,d,I)
     M = l*k*(-Omega1^2+Omega3^2) ;                       % Pitch Moment
     N = b*(Omega1^2-Omega2^2+Omega3^2-Omega4^2) ;        % Yaw Moment
 
-    pdot = ((q*r*(I(3,3)-I(2,2))) + L)/I(1,1) ;
+    pdot = ((q*r*(I(3,3)-I(2,2))) + L)/I(1,1) ;         % I was getting something different for pdot, qdot, and rdot, but I still need to check it out
     qdot = ((p*r*(I(1,1)-I(3,3))) + M)/I(2,2) ;
     rdot = ((p*q*(I(2,2)-I(1,1))) + N)/I(3,3) ;
 
