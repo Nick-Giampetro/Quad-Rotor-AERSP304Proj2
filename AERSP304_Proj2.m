@@ -39,19 +39,19 @@ ploter(t,a,'2')
 function ploter(t,x,Q)
     figure
     subplot(2,3,1)
-    plot(t,x(:,7))
+    plot(t,x(:,7),'r')
     title('phi(t) vs. t');
     xlabel('t');
     ylabel('phi');
 
     subplot(2,3,2)
-    plot(t,x(:,9))
+    plot(t,x(:,9),'g')
     title('theta(t) vs. t');
     xlabel('t');
     ylabel('theta');
 
     subplot(2,3,3)
-    plot(t,x(:,11))
+    plot(t,x(:,11),'b')
     title('psi(t) vs. t');
     xlabel('t');
     ylabel('psi');
