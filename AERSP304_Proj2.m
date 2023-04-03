@@ -98,9 +98,11 @@ function ploter(t,x,Q)
     ax = gca ;
     exportgraphics(ax,['position' Q '.jpg'])
     
-    bx = bodyDCM(1,:).*x(:,2);
-    by = bodyDCM(2,:).*x(:,4);
-    bz = bodyDCM(3,:).*x(:,6);
+    for i = 1:size(x,1)
+    bx = bodyDCM(1,:)*x(i,2);
+    by = bodyDCM(2,:)*x(i,4);
+    bz = bodyDCM(3,:)*x(i,6);
+    end
     
     figure
     subplot(2,3,1)
@@ -125,6 +127,7 @@ function ploter(t,x,Q)
     plot(t,bx,'r',t,by,'g',t,bz,'b')
     ax = gca ;
     exportgraphics(ax,['velocity' Q '.jpg'])
+    
     
     figure
     subplot(2,3,1)
