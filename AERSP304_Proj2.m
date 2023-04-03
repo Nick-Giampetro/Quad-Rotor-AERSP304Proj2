@@ -135,6 +135,11 @@ function ploter(t,x,Q)
     plot(t,x(:,8),'r',t,x(:,10),'g',t,x(:,12),'b')
     ax = gca ;
     exportgraphics(ax,['body rates' Q '.jpg'])
+    
+    figure
+    plot(t,x(:,13),t,x(:,14),t,x(:,15),t,x(:,16))
+    ax = gca ;
+    exportgraphics(ax,['rotor velocity' Q '.jpg'])
 
 end
 
