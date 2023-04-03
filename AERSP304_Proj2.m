@@ -93,7 +93,7 @@ function ploter(t,x,Q)
     plot(t,x(:,1),'r',t,x(:,3),'g',t,x(:,5),'b')
     xlabel('time');
     ylabel('inertial position');
-    title('Inertial Posiition vs Time')
+    title('Inertial Position vs Time')
     exportgraphics(f,['inertial position' Q '.jpg'])
     
     for i = 1:size(x,1)                                         % converts from the inertial frame to the body frame
