@@ -90,8 +90,8 @@ function ploter(t,x,Q)
     plot(t,x(:,1),'r',t,x(:,3),'g',t,x(:,5),'b')
     exportgraphics(f,['inertial position' Q '.jpg'])
     
-    for i = 1:size(x,1)
-        bodyDCM = eul2rotm([x(i,7),x(i,9),x(i,11)],'ZYX');          % converts from the inertial frame to the body frame
+    for i = 1:size(x,1)                                         % converts from the inertial frame to the body frame
+        bodyDCM = eul2rotm([x(i,7),x(i,9),x(i,11)],'ZYX');      % need special toolbox to use eul2rotm funcion (we used the UAV Toolbox)
         bx(:,i) = bodyDCM*[x(i,2),x(i,4),x(i,6)]';
     end
     
