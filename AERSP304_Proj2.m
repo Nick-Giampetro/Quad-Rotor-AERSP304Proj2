@@ -44,7 +44,7 @@ title('Rotor Speeds???')
 
 function ploter(t,x,Q)
 
-    f=figure
+    f = figure
     subplot(2,3,1)
     plot(t,x(:,7),'r')
     title('phi(t) vs. t');
@@ -68,7 +68,7 @@ function ploter(t,x,Q)
     ylim([0,0.06]);
     exportgraphics(f,['Euler Angles' Q '.jpg'])
     
-    figure
+    f = figure
     subplot(2,3,1)
     plot(t,x(:,1),'r')
     title('x(t) vs. t');
@@ -89,15 +89,14 @@ function ploter(t,x,Q)
     
     subplot(2,3,[4,6])
     plot(t,x(:,1),'r',t,x(:,3),'g',t,x(:,5),'b')
-    ax = gca ;
-    exportgraphics(ax,['position' Q '.jpg'])
+    exportgraphics(f,['inertial position' Q '.jpg'])
     
     for i = 1:size(x,1)
         bodyDCM = eul2rotm([x(i,7),x(i,9),x(i,11)],'ZYX');          % converts from the inertial frame to the body frame
         bx(:,i) = bodyDCM*[x(i,2),x(i,4),x(i,6)]';
     end
     
-    figure
+    f = figure
     subplot(2,3,1)
     plot(t,bx(1,:),'r')
     title('Vx(t) vs. t');
@@ -118,11 +117,9 @@ function ploter(t,x,Q)
     
     subplot(2,3,[4,6])
     plot(t,bx(1,:),'r',t,bx(2,:),'g',t,bx(3,:),'b')
-    ax = gca ;
-    exportgraphics(ax,['velocity' Q '.jpg'])
+    exportgraphics(f,['Body Velocity' Q '.jpg'])
     
-    
-    figure
+    f = figure
     subplot(2,3,1)
     plot(t,x(:,8),'r')
     title('Pvel(t) vs. t');
@@ -143,9 +140,7 @@ function ploter(t,x,Q)
     
     subplot(2,3,[4,6])
     plot(t,x(:,8),'r',t,x(:,10),'g',t,x(:,12),'b')
-    ax = gca ;
-    exportgraphics(ax,['body rates' Q '.jpg'])
-
+    exportgraphics(f,['Body Rates' Q '.jpg'])
 end
 
 
