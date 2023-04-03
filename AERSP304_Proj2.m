@@ -38,7 +38,11 @@ rotorSpeeds = getRotorSpeed ;
 
 ploter(t,a,'2')
 
-plot(t,rotorSpeeds(:,1),t,rotorSpeeds(:,2),t,rotorSpeeds(:,3),t,rotorSpeeds(:,4))
+temp = size(rotorSpeeds,1);
+rt = linspace(0,120,temp);
+
+figure
+plot(rt,rotorSpeeds(:,1),rt,rotorSpeeds(:,2),rt,rotorSpeeds(:,3),rt,rotorSpeeds(:,4))
 
 function ploter(t,x,Q)
     figure
