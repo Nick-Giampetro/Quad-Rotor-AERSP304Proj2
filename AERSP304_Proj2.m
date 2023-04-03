@@ -38,11 +38,11 @@ rotorSpeeds = getRotorSpeed ;
 
 ploter(t,a,'2')
 
-temp = size(rotorSpeeds,1);
-rt = linspace(0,120,temp);
+rt = linspace(0,120,size(rotorSpeeds,1));
 
 figure
 plot(rt,rotorSpeeds(:,1),rt,rotorSpeeds(:,2),rt,rotorSpeeds(:,3),rt,rotorSpeeds(:,4))
+title('Rotor Speeds???')
 
 function ploter(t,x,Q)
     figure
@@ -315,7 +315,7 @@ end
 function setRotorSpeed(r1,r2,r3,r4)
 global rotorSpeed
 
-newRow = size(rotorSpeed,1)+1
+newRow = size(rotorSpeed,1)+1 ;
 
 rotorSpeed(newRow,1) = r1 ;
 rotorSpeed(newRow,2) = r2 ;
