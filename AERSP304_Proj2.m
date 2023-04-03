@@ -44,7 +44,7 @@ title('Rotor Speeds???')
 
 function ploter(t,x,Q)
 
-    figure
+    f=figure
     subplot(2,3,1)
     plot(t,x(:,7),'r')
     title('phi(t) vs. t');
@@ -66,8 +66,7 @@ function ploter(t,x,Q)
     subplot(2,3,[4,6])
     plot(t,x(:,7),'r',t,x(:,9),'g',t,x(:,11),'b')
     ylim([0,0.06]);
-    ax = gca ;
-    exportgraphics(ax,['Euler Angles' Q '.jpg'])
+    exportgraphics(f,['Euler Angles' Q '.jpg'])
     
     figure
     subplot(2,3,1)
