@@ -65,7 +65,6 @@ function ploter(t,x,Q)
     
     subplot(2,3,[4,6])
     plot(t,x(:,7),'r',t,x(:,9),'g',t,x(:,11),'b')
-    ylim([0,0.06]);
     exportgraphics(f,['Euler Angles' Q '.jpg'])
     
     f = figure
