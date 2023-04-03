@@ -34,11 +34,6 @@ t = linspace(0,120,2400) ;
 [t,a] = ode45(@(t,d) Q2fun(t,d,I,[10,0,0,0,0,0,0,0]), t , init , options);
 
 
-omega_1 = sqrt((T/(4*k))-(M/(2*k*l))+(N/(4*b)))
-omega_2 = sqrt((T/(4*k))-(L/(2*k*l))-(N/(4*b)))
-omega_3 = sqrt((T/(4*k))+(M/(2*k*l))+(N/(4*b)))
-omega_4 = sqrt((T/(4*k))+(L/(2*k*l))-(N/(4*b)))
-
 ploter(t,a,'2')
 
 
@@ -295,6 +290,14 @@ function    dDot = Q2fun(t,d,I,rS)
     y2dot = (T/m) * (sin(psi)*sin(theta)*cos(phi)-cos(psi)*sin(phi)) ;
     z2dot = (T/m) * (cos(phi)*cos(theta)) - g ;
 
+ 
+        rotor1 = sqrt((T/(4*k))-(M/(2*k*l))+(N/(4*b)))
+        rotor2 = sqrt((T/(4*k))-(L/(2*k*l))-(N/(4*b)))
+        rotor3 = sqrt((T/(4*k))+(M/(2*k*l))+(N/(4*b)))
+        rotor4 = sqrt((T/(4*k))+(L/(2*k*l))-(N/(4*b)))
+  
+    
+    
     % return
     dDot = [x1dot; x2dot; y1dot; y2dot; z1dot; z2dot; phidot; pdot; thetadot; qdot; psidot; rdot];
 end
