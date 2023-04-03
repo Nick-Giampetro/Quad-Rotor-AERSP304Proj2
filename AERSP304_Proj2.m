@@ -20,7 +20,7 @@ I = [ 4.85*10^-3 , 0, 0 ;
 options = odeset('reltol',1e-12,'abstol',1e-12);
 
 % Question 1
-init = [0,0,0,0,0,0,0,0,0,0,0,0] ;
+init = zeros(12,1);
 t = linspace(0,6,1200) ;
 [t,d] = ode45(@(t,d) Q1fun(t,d,I), t , init , options);
 
@@ -29,7 +29,7 @@ ploter(t,d,'1')
 
 
 %Question 2
-init = [0,0,0,0,1,0,10*pi/180,0,10*pi/180,0,10*pi/180,0] ;
+init = [0,0,0,0,1,0,10*pi/180,0,10*pi/180,0,10*pi/180,0,0,0,0,0] ;
 t = linspace(0,120,2400) ;
 [t,a] = ode45(@(t,d) Q2fun(t,d,I,[10,0,0,0,0,0,0,0]), t , init , options);
 
@@ -291,15 +291,15 @@ function    dDot = Q2fun(t,d,I,rS)
     z2dot = (T/m) * (cos(phi)*cos(theta)) - g ;
 
  
-        rotor1 = sqrt((T/(4*k))-(M/(2*k*l))+(N/(4*b)))
-        rotor2 = sqrt((T/(4*k))-(L/(2*k*l))-(N/(4*b)))
-        rotor3 = sqrt((T/(4*k))+(M/(2*k*l))+(N/(4*b)))
-        rotor4 = sqrt((T/(4*k))+(L/(2*k*l))-(N/(4*b)))
+        rotor(1) = sqrt((T/(4*k))-(M/(2*k*l))+(N/(4*b)));
+        rotor(2) = sqrt((T/(4*k))-(L/(2*k*l))-(N/(4*b)));
+        rotor(3) = sqrt((T/(4*k))+(M/(2*k*l))+(N/(4*b)));
+        rotor(4) = sqrt((T/(4*k))+(L/(2*k*l))-(N/(4*b)));
   
     
     
     % return
-    dDot = [x1dot; x2dot; y1dot; y2dot; z1dot; z2dot; phidot; pdot; thetadot; qdot; psidot; rdot];
+    dDot = [x1dot; x2dot; y1dot; y2dot; z1dot; z2dot; phidot; pdot; thetadot; qdot; psidot; rdot; rotor(1); rotor(2); rotor(3); rotor(4)];
 end
 
 
