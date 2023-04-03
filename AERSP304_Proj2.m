@@ -135,11 +135,6 @@ function ploter(t,x,Q)
     plot(t,x(:,8),'r',t,x(:,10),'g',t,x(:,12),'b')
     ax = gca ;
     exportgraphics(ax,['body rates' Q '.jpg'])
-    
-    figure
-    plot(t,x(:,13),t,x(:,14),t,x(:,15),t,x(:,16))
-    ax = gca ;
-    exportgraphics(ax,['rotor velocity' Q '.jpg'])
 
 end
 
@@ -311,10 +306,13 @@ end
 
 function setRotorSpeed(r1,r2,r3,r4)
 global rotorSpeed
-rotorSpeed((size(rotorSpeed,1)+1),1) = r1 ;
-rotorSpeed((size(rotorSpeed,1)+1),2) = r2 ;
-rotorSpeed((size(rotorSpeed,1)+1),3) = r3 ;
-rotorSpeed((size(rotorSpeed,1)+1),4) = r4 ;
+
+newRow = size(rotorSpeed,1)+1
+
+rotorSpeed(newRow,1) = r1 ;
+rotorSpeed(newRow,2) = r2 ;
+rotorSpeed(newRow,3) = r3 ;
+rotorSpeed(newRow,4) = r4 ;
 end
 
 function r = getRotorSpeed
