@@ -33,12 +33,14 @@ ploter(t,d,'1')
 init = [0,0,0,0,1,0,10*pi/180,0,10*pi/180,0,10*pi/180,0] ;
 t = linspace(0,120,6000) ;
 [t,a] = ode45(@(t,d) Q2fun(t,d,I,[10,0,0,0,0,0,0,0]), t , init);
+[~,rotorSpeeds] = Q2fun(t,d,I,[10,0,0,0,0,0,0,0]) ;
 
 
 ploter(t,a,'2')
 
-rotorSpeeds = getRotorSpeed ;
-rt = linspace(0,120,size(rotorSpeeds,1));
+rt = t ;
+% rotorSpeeds = getRotorSpeed ;
+% rt = linspace(0,120,size(rotorSpeeds,1));
 figure
 plot(rt,rotorSpeeds(:,1),rt,rotorSpeeds(:,2),rt,rotorSpeeds(:,3),rt,rotorSpeeds(:,4))
 title('Rotor Speeds???')
@@ -242,7 +244,7 @@ function    dDot = Q1fun(t,d,I)
 end
 
 
-function    dDot = Q2fun(t,d,I,rS)
+function    [dDot,rotor] = Q2fun(t,d,I,rS)
     % pulling consts into function
     g = getG ;
     m = getM ;
@@ -304,7 +306,7 @@ function    dDot = Q2fun(t,d,I,rS)
     rotor(3) = sqrt((T/(4*k))+(M/(2*k*l))+(N/(4*b)));
     rotor(4) = sqrt((T/(4*k))+(L/(2*k*l))-(N/(4*b)));
   
-    setRotorSpeed(rotor(1),rotor(2),rotor(3),rotor(4));
+    %setRotorSpeed(rotor(1),rotor(2),rotor(3),rotor(4));
     
     % return
     dDot = [x1dot; x2dot; y1dot; y2dot; z1dot; z2dot; phidot; pdot; thetadot; qdot; psidot; rdot];
