@@ -4,6 +4,7 @@
 clc;
 clear;
 close all;
+clear global;
 
 % setting constants values
 setGlobalG(9.81) ; % m/s
