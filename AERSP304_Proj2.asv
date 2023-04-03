@@ -65,9 +65,9 @@ function ploter(t,x,Q)
     
     subplot(2,3,[4,6])
     plot(t,x(:,7),'r',t,x(:,9),'g',t,x(:,11),'b')
-    xlabel('time');
+    xlabel('t');
     ylabel('Euler Angles');
-    title('Euler Angles vs Time');
+    title('Euler Angles vs t');
     exportgraphics(f,['Euler Angles' Q '.jpg'])
     
     f = figure
@@ -91,9 +91,7 @@ function ploter(t,x,Q)
     
     subplot(2,3,[4,6])
     plot(t,x(:,1),'r',t,x(:,3),'g',t,x(:,5),'b')
-    xlabel('time');
-    ylabel('inertial position');
-    title('Inertial Posiition vs Time')
+    
     exportgraphics(f,['inertial position' Q '.jpg'])
     
     for i = 1:size(x,1)                                         % converts from the inertial frame to the body frame
@@ -122,9 +120,6 @@ function ploter(t,x,Q)
     
     subplot(2,3,[4,6])
     plot(t,bx(1,:),'r',t,bx(2,:),'g',t,bx(3,:),'b')
-    xlabel('time');
-    ylabel('body velocity');
-    title('Body Velocity vs Time');
     exportgraphics(f,['Body Velocity' Q '.jpg'])
     
     f = figure
@@ -140,7 +135,7 @@ function ploter(t,x,Q)
     xlabel('t');
     ylabel('Qvel');
 
-    subplot(2,3,3)                     
+    subplot(2,3,3)                      % questionable about how R vs t looks
     plot(t,x(:,12),'b')
     title('Rvel(t) vs. t');
     xlabel('t');
@@ -148,9 +143,6 @@ function ploter(t,x,Q)
     
     subplot(2,3,[4,6])
     plot(t,x(:,8),'r',t,x(:,10),'g',t,x(:,12),'b')
-    xlabel('time')
-    ylabel('angular rates');
-    title('Angular Rates vs Time');
     exportgraphics(f,['Body Rates' Q '.jpg'])
 end
 
