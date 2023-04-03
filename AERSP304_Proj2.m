@@ -27,14 +27,11 @@ t = linspace(0,6,1200) ;
 
 ploter(t,d,'1')
 
-
-
 %Question 2
 init = [0,0,0,0,1,0,10*pi/180,0,10*pi/180,0,10*pi/180,0] ;
 t = linspace(0,120,6000) ;
 [t,a] = ode45(@(t,d) Q2fun(t,d,I,[10,0,0,0,0,0,0,0]), t , init);
 [~,rotorSpeeds] = Q2fun(t,d,I,[10,0,0,0,0,0,0,0]) ;
-
 
 ploter(t,a,'2')
 
@@ -46,8 +43,6 @@ plot(rt,rotorSpeeds(:,1),rt,rotorSpeeds(:,2),rt,rotorSpeeds(:,3),rt,rotorSpeeds(
 title('Rotor Speeds???')
 
 function ploter(t,x,Q)
-
-    bodyDCM = eul2rotm([x(:,7),x(:,9),x(:,11)],'ZYX');
 
     figure
     subplot(2,3,1)
@@ -99,32 +94,31 @@ function ploter(t,x,Q)
     exportgraphics(ax,['position' Q '.jpg'])
     
     for i = 1:size(x,1)
-    bx = bodyDCM(1,:)*x(i,2);
-    by = bodyDCM(2,:)*x(i,4);
-    bz = bodyDCM(3,:)*x(i,6);
+        bodyDCM = eul2rotm([x(i,7),x(i,9),x(i,11)],'ZYX');          % converts from the inertial frame to the body frame
+        bx(:,i) = bodyDCM*[x(i,2),x(i,4),x(i,6)]';
     end
     
     figure
     subplot(2,3,1)
-    plot(t,bx,'r')
+    plot(t,bx(1,:),'r')
     title('Vx(t) vs. t');
     xlabel('t');
     ylabel('Vx');
 
     subplot(2,3,2)
-    plot(t,by,'g')
+    plot(t,bx(2,:),'g')
     title('Vy(t) vs. t');
     xlabel('t');
     ylabel('Vy');
 
     subplot(2,3,3)
-    plot(t,bz,'b')
+    plot(t,bx(3,:),'b')
     title('Vz(t) vs. t');
     xlabel('t');
     ylabel('Vz');
     
     subplot(2,3,[4,6])
-    plot(t,bx,'r',t,by,'g',t,bz,'b')
+    plot(t,bx(1,:),'r',t,bx(2,:),'g',t,bx(3,:),'b')
     ax = gca ;
     exportgraphics(ax,['velocity' Q '.jpg'])
     
