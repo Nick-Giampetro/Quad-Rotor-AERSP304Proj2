@@ -47,7 +47,7 @@ title('Rotor Speeds???')
 
 function ploter(t,x,Q)
 
-    bodyDCM = eul2rotm([x(:,7),x(:,9),x(:,11)],'ZYX');
+    bodyDCM = eul2rotm([x(:,7),x(:,9),x(:,11)],'ZYX')
 
     figure
     subplot(2,3,1)
@@ -98,31 +98,29 @@ function ploter(t,x,Q)
     ax = gca ;
     exportgraphics(ax,['position' Q '.jpg'])
     
-    bx = bodyDCM(1,:).*x(:,2);
-    by = bodyDCM(2,:).*x(:,4);
-    bz = bodyDCM(3,:).*x(:,6);
+    bx = bodyDCM*x(:,2)
     
     figure
     subplot(2,3,1)
-    plot(t,bx,'r')
+    plot(t,x(:,2),'r')
     title('Vx(t) vs. t');
     xlabel('t');
     ylabel('Vx');
 
     subplot(2,3,2)
-    plot(t,by,'g')
+    plot(t,x(:,4),'g')
     title('Vy(t) vs. t');
     xlabel('t');
     ylabel('Vy');
 
     subplot(2,3,3)
-    plot(t,bz,'b')
+    plot(t,x(:,6),'b')
     title('Vz(t) vs. t');
     xlabel('t');
     ylabel('Vz');
     
     subplot(2,3,[4,6])
-    plot(t,bx,'r',t,by,'g',t,bz,'b')
+    plot(t,x(:,2),'r',t,x(:,4),'g',t,x(:,6),'b')
     ax = gca ;
     exportgraphics(ax,['velocity' Q '.jpg'])
     
