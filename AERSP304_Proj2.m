@@ -29,7 +29,7 @@ ploter(t,d,'1')
 
 %Question 2
 init = [0,0,0,0,1,0,10*pi/180,0,10*pi/180,0,10*pi/180,0] ;
-t = linspace(0,120,6000) ;
+t = linspace(0,120,1200) ;
 [t,a] = ode45(@(t,d) Q2fun(t,d,I,[10,0,0,0,0,0,0,0]), t , init);
 %[~,rotorSpeeds] = Q2fun(t,d,I,[10,0,0,0,0,0,0,0]) ;
 
