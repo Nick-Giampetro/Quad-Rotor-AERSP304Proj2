@@ -35,9 +35,9 @@ t = linspace(0,120,1200) ;
 
 ploter(t,a,'2')
 
-rt = t ;
+
 rotorSpeeds = getRotorSpeed ;
-rt = linspace(0,120,size(rotorSpeeds,1));
+rt = rotorSpeeds(:,5);
 figure
 plot(rt,rotorSpeeds(:,1),rt,rotorSpeeds(:,2),rt,rotorSpeeds(:,3),rt,rotorSpeeds(:,4))
 title('Rotor Speeds???')
@@ -318,6 +318,7 @@ function    [dDot,rotor] = Q2fun(t,d,I,rS)
     rotor(2) = sqrt((T/(4*k))-(L/(2*k*l))-(N/(4*b)));
     rotor(3) = sqrt((T/(4*k))+(M/(2*k*l))+(N/(4*b)));
     rotor(4) = sqrt((T/(4*k))+(L/(2*k*l))-(N/(4*b)));
+    rotor(5) = t;
   
     setRotorSpeed(rotor);
     
