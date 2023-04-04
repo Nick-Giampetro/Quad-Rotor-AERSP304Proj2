@@ -95,7 +95,7 @@ function ploter(t,x,Q)
     xlabel('time');
     ylabel('inertial position');
     title('Inertial Position vs Time')
-    legend('x','y','z','location','southwest');
+    legend('x','y','z','location','best'
     exportgraphics(f,['inertial position' Q '.jpg'])
     
     for i = 1:size(x,1)                                         % converts from the inertial frame to the body frame
@@ -127,7 +127,6 @@ function ploter(t,x,Q)
     xlabel('time');
     ylabel('body velocity');
     title('Body Velocity vs Time');
-    legend('x dot','y dot','z dot','location','best');
     exportgraphics(f,['Body Velocity' Q '.jpg'])
     
     f = figure
@@ -154,7 +153,6 @@ function ploter(t,x,Q)
     xlabel('time')
     ylabel('angular rates');
     title('Angular Rates vs Time');
-    legend('p','q','r','location','best');
     exportgraphics(f,['Body Rates' Q '.jpg'])
 end
 
