@@ -35,12 +35,17 @@ t = linspace(0,120,1200) ;
 
 ploter(t,a,'2')
 
-
+% plot rotor speed
 rotorSpeeds = getRotorSpeed ;
 rt = rotorSpeeds(:,5);
-figure
+f = figure
 plot(rt,rotorSpeeds(:,1),rt,rotorSpeeds(:,2),rt,rotorSpeeds(:,3),rt,rotorSpeeds(:,4))
-title('Rotor Speeds???')
+title('Rotor Speeds')
+legend('Rotor 1','Rotor 2','Rotor 3','Rotor 4');
+xlabel('t');
+ylabel('rad/s');
+exportgraphics(f,['Rotor Speed' '2' '.jpg'])
+
 
 function ploter(t,x,Q)
 

@@ -35,11 +35,11 @@ t = linspace(0,120,1200) ;
 
 ploter(t,a,'2')
 
-rt = t ;
+
 rotorSpeeds = getRotorSpeed ;
-rt = linspace(0,120,size(rotorSpeeds,1));
+rt = ;
 figure
-plot(rt,rotorSpeeds(:,1),rt,rotorSpeeds(:,2),rt,rotorSpeeds(:,3),rt,rotorSpeeds(:,4))
+plot(rt,rotorSpeeds(:,1),rt,rotorSpeeds(:,2),rotorSpeeds(:,5),rotorSpeeds(:,3),rt,rotorSpeeds(:,4))
 title('Rotor Speeds???')
 
 function ploter(t,x,Q)
@@ -95,7 +95,7 @@ function ploter(t,x,Q)
     xlabel('time');
     ylabel('inertial position');
     title('Inertial Position vs Time')
-    legend('x','y','z','location','best'
+    legend('x','y','z','location','southwest');
     exportgraphics(f,['inertial position' Q '.jpg'])
     
     for i = 1:size(x,1)                                         % converts from the inertial frame to the body frame
@@ -127,6 +127,7 @@ function ploter(t,x,Q)
     xlabel('time');
     ylabel('body velocity');
     title('Body Velocity vs Time');
+    legend('x dot','y dot','z dot','location','best');
     exportgraphics(f,['Body Velocity' Q '.jpg'])
     
     f = figure
@@ -153,6 +154,7 @@ function ploter(t,x,Q)
     xlabel('time')
     ylabel('angular rates');
     title('Angular Rates vs Time');
+    legend('p','q','r','location','best');
     exportgraphics(f,['Body Rates' Q '.jpg'])
 end
 
@@ -316,6 +318,7 @@ function    [dDot,rotor] = Q2fun(t,d,I,rS)
     rotor(2) = sqrt((T/(4*k))-(L/(2*k*l))-(N/(4*b)));
     rotor(3) = sqrt((T/(4*k))+(M/(2*k*l))+(N/(4*b)));
     rotor(4) = sqrt((T/(4*k))+(L/(2*k*l))-(N/(4*b)));
+    rotor(5) = t;
   
     setRotorSpeed(rotor);
     
