@@ -18,19 +18,19 @@ I = [ 4.85*10^-3 , 0, 0 ;
      0 , 0 , 8.80*10^-3 ] ;
 
 % setting ODE45 options
-options = odeset('reltol',1e-6,'abstol',1e-6);
+options = odeset('reltol',1e-12,'abstol',1e-12);
 
 % Question 1
 init = zeros(12,1);
 t = linspace(0,6,1200) ;
-[t,d] = ode45(@(t,d) Q1fun(t,d,I), t , init);
+[t,d] = ode45(@(t,d) Q1fun(t,d,I), t , init, options);
 
 ploter(t,d,'1')
 
 %Question 2
 init = [0,0,0,0,1,0,10*pi/180,0,10*pi/180,0,10*pi/180,0] ;
 t = linspace(0,120,1200) ;
-[t,a] = ode45(@(t,d) Q2fun(t,d,I,[10,0,0,0,0,0,0,0]), t , init);
+[t,a] = ode45(@(t,d) Q2fun(t,d,I,[10,0,0,0,0,0,0,0]), t , init, options);
 %[~,rotorSpeeds] = Q2fun(t,d,I,[10,0,0,0,0,0,0,0]) ;
 
 ploter(t,a,'2')
