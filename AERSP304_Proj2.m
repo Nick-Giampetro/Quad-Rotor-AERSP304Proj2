@@ -38,7 +38,7 @@ ploter(t,a,'2')
 % plot rotor speed
 rotorSpeeds = getRotorSpeed ;
 rt = rotorSpeeds(:,5);
-f = figure
+f = figure  ;
 plot(rt,rotorSpeeds(:,1),rt,rotorSpeeds(:,2),rt,rotorSpeeds(:,3),rt,rotorSpeeds(:,4))
 title('Rotor Speeds')
 legend('Rotor 1','Rotor 2','Rotor 3','Rotor 4');
@@ -49,7 +49,7 @@ exportgraphics(f,['Rotor Speed' '2' '.jpg'])
 
 function ploter(t,x,Q)
 
-    f = figure
+    f = figure ;
     subplot(2,3,1)
     plot(t,x(:,7),'r')
     title('phi(t) vs. t');
@@ -76,7 +76,7 @@ function ploter(t,x,Q)
     legend('phi','theta','psi','location','best');
     exportgraphics(f,['Euler Angles' Q '.jpg'])
     
-    f = figure
+    f = figure ;
     subplot(2,3,1)
     plot(t,x(:,1),'r')
     title('x(t) vs. t');
@@ -108,7 +108,7 @@ function ploter(t,x,Q)
         bx(:,i) = bodyDCM*[x(i,2),x(i,4),x(i,6)]';
     end
     
-    f = figure
+    f = figure ;
     subplot(2,3,1)
     plot(t,bx(1,:),'r')
     title('Vx(t) vs. t');
@@ -135,7 +135,7 @@ function ploter(t,x,Q)
     legend('x dot','y dot','z dot','location','best');
     exportgraphics(f,['Body Velocity' Q '.jpg'])
     
-    f = figure
+    f = figure ;
     subplot(2,3,1)
     plot(t,x(:,8),'r')
     title('Pvel(t) vs. t');
