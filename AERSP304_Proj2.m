@@ -333,9 +333,7 @@ end
 
 function setRotorSpeed(r)
 global rotorSpeed
-
 newRow = size(rotorSpeed,1)+1 ;
-
 rotorSpeed(newRow,:) = r ;
 end
 
